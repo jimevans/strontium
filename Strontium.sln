@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriver.Remote.Server", "WebDriver.Remote.Server\WebDriver.Remote.Server.csproj", "{D5E01A6E-FA03-45EA-BEC5-12FEC4859403}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriverRemoteServer", "WebDriverRemoteServer\WebDriverRemoteServer.csproj", "{EB77DBA1-8884-41D5-B398-CABBDF72ED33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5E01A6E-FA03-45EA-BEC5-12FEC4859403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5E01A6E-FA03-45EA-BEC5-12FEC4859403}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5E01A6E-FA03-45EA-BEC5-12FEC4859403}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5E01A6E-FA03-45EA-BEC5-12FEC4859403}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB77DBA1-8884-41D5-B398-CABBDF72ED33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB77DBA1-8884-41D5-B398-CABBDF72ED33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB77DBA1-8884-41D5-B398-CABBDF72ED33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB77DBA1-8884-41D5-B398-CABBDF72ED33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

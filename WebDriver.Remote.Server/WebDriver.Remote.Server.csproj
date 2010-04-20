@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D5E01A6E-FA03-45EA-BEC5-12FEC4859403}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OpenQA.Selenium.Remote.Server</RootNamespace>
+    <AssemblyName>WebDriver.Remote.Server</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\WebDriver.Remote.Server.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="WebDriver.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="WebDriver.Remote, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommandHandler.cs" />
+    <Compile Include="CommandHandlerFactory.cs" />
+    <Compile Include="CommandHandlers\DescribeElementHandler.cs" />
+    <Compile Include="CommandHandlers\DefineDriverMappingHandler.cs" />
+    <Compile Include="CommandHandlers\ClickElementHandler.cs" />
+    <Compile Include="CommandHandlers\ClearElementHandler.cs" />
+    <Compile Include="CommandHandlers\CommandNotImplementedHandler.cs" />
+    <Compile Include="CommandHandlers\CloseHandler.cs" />
+    <Compile Include="CommandHandlers\AddCookieHandler.cs" />
+    <Compile Include="CommandHandlers\ScreenshotHandler.cs" />
+    <Compile Include="CommandHandlers\ElementEqualsHandler.cs" />
+    <Compile Include="CommandHandlers\GetElementValueOfCssPropertyHandler.cs" />
+    <Compile Include="CommandHandlers\GetElementSizeHandler.cs" />
+    <Compile Include="CommandHandlers\GetElementLocationHandler.cs" />
+    <Compile Include="CommandHandlers\GetElementScrolledIntoViewLocationHandler.cs" />
+    <Compile Include="CommandHandlers\GetElementDisplayedHandler.cs" />
+    <Compile Include="CommandHandlers\GetElementEnabledHandler.cs" />
+    <Compile Include="CommandHandlers\GetElementSelectedHandler.cs" />
+    <Compile Include="CommandHandlers\DragElementHandler.cs" />
+    <Compile Include="CommandHandlers\SetElementSelectedHandler.cs" />
+    <Compile Include="CommandHandlers\GetElementTagNameHandler.cs" />
+    <Compile Include="CommandHandlers\GetElementValueHandler.cs" />
+    <Compile Include="CommandHandlers\GetElementTextHandler.cs" />
+    <Compile Include="CommandHandlers\SetSpeedHandler.cs" />
+    <Compile Include="CommandHandlers\GetSpeedHandler.cs" />
+    <Compile Include="CommandHandlers\ExecuteScriptHandler.cs" />
+    <Compile Include="CommandHandlers\GetPageSourceHandler.cs" />
+    <Compile Include="CommandHandlers\GetCurrentUrlHandler.cs" />
+    <Compile Include="CommandHandlers\GetActiveElementHandler.cs" />
+    <Compile Include="CommandHandlers\SwitchToFrameHandler.cs" />
+    <Compile Include="CommandHandlers\SwitchToWindowHandler.cs" />
+    <Compile Include="CommandHandlers\GetAllWindowsHandler.cs" />
+    <Compile Include="CommandHandlers\GetCurrentWindowHandler.cs" />
+    <Compile Include="CommandHandlers\ToggleElementHandler.cs" />
+    <Compile Include="CommandHandlers\SubmitElementHandler.cs" />
+    <Compile Include="CommandHandlers\SendKeysToElementHandler.cs" />
+    <Compile Include="CommandHandlers\HoverOverElementHandler.cs" />
+    <Compile Include="CommandHandlers\FindChildElementsHandler.cs" />
+    <Compile Include="CommandHandlers\FindElementsHandler.cs" />
+    <Compile Include="CommandHandlers\DeleteCookieNamedHandler.cs" />
+    <Compile Include="CommandHandlers\DeleteAllCookiesHandler.cs" />
+    <Compile Include="CommandHandlers\GetAllCookiesHandler.cs" />
+    <Compile Include="CommandHandlers\RefreshHandler.cs" />
+    <Compile Include="CommandHandlers\GoForwardHandler.cs" />
+    <Compile Include="CommandHandlers\GoBackHandler.cs" />
+    <Compile Include="CommandHandlers\GetSessionCapabilitiesHandler.cs" />
+    <Compile Include="CommandHandlers\FindElementHandler.cs" />
+    <Compile Include="CommandHandlers\ChangeUrlHandler.cs" />
+    <Compile Include="CommandHandlers\FindChildElementHandler.cs" />
+    <Compile Include="CommandHandlers\GetElementAttributeHandler.cs" />
+    <Compile Include="CommandHandlers\NewSessionHandler.cs" />
+    <Compile Include="CommandHandlers\QuitHandler.cs" />
+    <Compile Include="CommandHandlers\GetTitleHandler.cs" />
+    <Compile Include="CommandHandlers\WebDriverCommandHandler.cs" />
+    <Compile Include="DriverFactory.cs" />
+    <Compile Include="DriverRegistrationFailedEventArgs.cs" />
+    <Compile Include="Exceptions\InvalidCommandException.cs" />
+    <Compile Include="Exceptions\InvalidParameterException.cs" />
+    <Compile Include="Exceptions\ResourceNotFoundException.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="KnownElementRepository.cs" />
+    <Compile Include="Loggers\ConsoleLogger.cs" />
+    <Compile Include="Loggers\NullLogger.cs" />
+    <Compile Include="LogLevel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemoteServer.cs" />
+    <Compile Include="ServerResponse.cs" />
+    <Compile Include="DriverSession.cs" />
+    <Compile Include="SessionManager.cs" />
+    <Compile Include="CommandHandlers\WebElementCommandHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Libraries\Ionic.Zip.Reduced.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\Newtonsoft.Json.Net20.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\WebDriver.Chrome.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\WebDriver.Chrome.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\WebDriver.Chrome.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\WebDriver.Common.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\WebDriver.Common.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\WebDriver.Common.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\WebDriver.Firefox.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\WebDriver.Firefox.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\WebDriver.Firefox.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\WebDriver.IE.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\WebDriver.IE.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\WebDriver.IE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\WebDriver.Remote.dll">
+    </Content>
+    <Content Include="Libraries\WebDriver.Remote.pdb">
+    </Content>
+    <Content Include="Libraries\WebDriver.Remote.xml">
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

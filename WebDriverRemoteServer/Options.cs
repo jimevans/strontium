@@ -24,6 +24,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using OpenQA.Selenium.Remote.Server.Internal;
+using System.Security.Principal;
 
 namespace OpenQA.Selenium.Remote.Server
 {
@@ -41,11 +42,13 @@ namespace OpenQA.Selenium.Remote.Server
         private string operatingSystemVersion = string.Empty;
         private string serverVersion = string.Empty;
         private bool reserveUrl;
+        private bool currentUserIsAdmin;
 
         internal Options(string[] commandLineArguments)
         {
             GetServerVersion();
             GetOSVersion();
+            GetCurrentUserAdminStatus();
             foreach (string arg in commandLineArguments)
             {
                 string[] argumentValues = arg.Split(new string[] { ":" }, 2, StringSplitOptions.None);
@@ -89,6 +92,11 @@ namespace OpenQA.Selenium.Remote.Server
         internal string Password
         {
             get { return password; }
+        }
+
+        internal bool CurrentUserIsAdmin
+        {
+            get { return currentUserIsAdmin; }
         }
 
         private void SetOption(string name, string value)
@@ -202,6 +210,20 @@ namespace OpenQA.Selenium.Remote.Server
             {
                 AssemblyDescriptionAttribute description = attributes[0] as AssemblyDescriptionAttribute;
                 serverVersion = description.Description;
+            }
+        }
+
+        private void GetCurrentUserAdminStatus()
+        {
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                WindowsIdentity identity = WindowsIdentity.GetCurrent();
+                WindowsPrincipal principal = new WindowsPrincipal(identity);
+                currentUserIsAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+            }
+            else
+            {
+                currentUserIsAdmin = true;
             }
         }
     }

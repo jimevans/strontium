@@ -26,7 +26,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Security.Principal;
 using System.Text;
 using OpenQA.Selenium.Remote.Server.Internal;
 using OpenQA.Selenium.Remote.Server.Loggers;
@@ -59,7 +58,7 @@ namespace OpenQA.Selenium.Remote.Server
                 userName = commandLineOptions.UserName;
                 password = commandLineOptions.Password;
                 httpServer = new RemoteServer(commandLineOptions.Port, "wd/hub/", logger);
-                bool urlReservationExists = CheckForUrlReservation();
+                bool urlReservationExists = CheckForUrlReservation(commandLineOptions);
                 if (urlReservationExists)
                 {
                     httpServer.StartListening();
@@ -88,9 +87,13 @@ namespace OpenQA.Selenium.Remote.Server
             logger.Log(serverVersion);
             logger.Log(".NET runtime version: " + Environment.Version.ToString());
             logger.Log("OS version: " + operatingSystemVersion);
+            if (!commandLineOptions.CurrentUserIsAdmin)
+            {
+                logger.Log("Process is not running as an administrator. Some actions may not function properly.", LogLevel.Warning);
+            }
         }
 
-        private static bool CheckForUrlReservation()
+        private static bool CheckForUrlReservation(Options commandLineOptions)
         {
             bool urlReservationExists = true;
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
@@ -109,10 +112,7 @@ namespace OpenQA.Selenium.Remote.Server
                 if (!urlReservationExists)
                 {
                     logger.Log(string.Format(CultureInfo.InvariantCulture, "URL reservation for '{0}' does not exist. Reserving URL.", httpServer.ListenerPrefix));
-                    WindowsIdentity identity = WindowsIdentity.GetCurrent();
-                    WindowsPrincipal principal = new WindowsPrincipal(identity);
-                    bool isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
-                    urlReservationExists = ReserveUrl(httpServer.ListenerPrefix, isAdmin);
+                    urlReservationExists = ReserveUrl(httpServer.ListenerPrefix, commandLineOptions.CurrentUserIsAdmin);
                 }
             }
 

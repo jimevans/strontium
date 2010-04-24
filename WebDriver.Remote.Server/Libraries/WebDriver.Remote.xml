@@ -235,7 +235,7 @@
         </member>
         <member name="P:OpenQA.Selenium.Remote.DesiredCapabilities.Platform">
             <summary>
-            Gets the platform
+            Gets or sets the platform
             </summary>
         </member>
         <member name="P:OpenQA.Selenium.Remote.DesiredCapabilities.Version">
@@ -246,6 +246,11 @@
         <member name="P:OpenQA.Selenium.Remote.DesiredCapabilities.IsJavaScriptEnabled">
             <summary>
             Gets or sets a value indicating whether the browser is javascript enabled
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.DriverCommand">
+            <summary>
+            Values describing the list of commands understood by a remote server using the JSON wire protocol.
             </summary>
         </member>
         <member name="F:OpenQA.Selenium.Remote.DriverCommand.DefineDriverMapping">
@@ -506,6 +511,11 @@
         <member name="F:OpenQA.Selenium.Remote.DriverCommand.Screenshot">
             <summary>
             Represents Screenshot command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.ImplicitlyWait">
+            <summary>
+            Represents the ImplicitlyWait command
             </summary>
         </member>
         <member name="T:OpenQA.Selenium.Remote.ErrorResponse">
@@ -1189,10 +1199,47 @@
             </summary>
             <returns>ReadOnlyCollection of Cookies in the browser</returns>
         </member>
+        <member name="M:OpenQA.Selenium.Remote.RemoteWebDriver.RemoteWebDriverOptions.Timeouts">
+            <summary>
+            Provides access to the timeouts defined for this driver.
+            </summary>
+            <returns>An object implementing the <see cref="T:OpenQA.Selenium.ITimeouts"/> interface.</returns>
+        </member>
         <member name="P:OpenQA.Selenium.Remote.RemoteWebDriver.RemoteWebDriverOptions.Speed">
             <summary>
             Gets or sets the speed with which actions are executed in the browser.
             </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.RemoteWebDriver.RemoteWebDriverOptions.RemoteTimeouts">
+            <summary>
+            Defines the interface through which the user can define timeouts.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.RemoteWebDriver.RemoteWebDriverOptions.RemoteTimeouts.#ctor(OpenQA.Selenium.Remote.RemoteWebDriver)">
+            <summary>
+            Initializes a new instance of the RemoteTimeouts class
+            </summary>
+            <param name="driver">The driver that is currently in use</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.RemoteWebDriver.RemoteWebDriverOptions.RemoteTimeouts.ImplicitlyWait(System.TimeSpan)">
+            <summary>
+            Specifies the amount of time the driver should wait when searching for an
+            element if it is not immediately present.
+            </summary>
+            <param name="timeToWait">A <see cref="T:System.TimeSpan"/> structure defining the amount of time to wait.</param>
+            <returns>A self reference</returns>
+            <remarks>
+            When searching for a single element, the driver should poll the page
+            until the element has been found, or this timeout expires before throwing
+            a <see cref="T:OpenQA.Selenium.NoSuchElementException"/>. When searching for multiple elements,
+            the driver should poll the page until at least one element has been found
+            or this timeout has expired.
+            <para>
+            Increasing the implicit wait timeout should be used judiciously as it
+            will have an adverse effect on test run time, especially when used with
+            slower location strategies like XPath.
+            </para>
+            </remarks>
         </member>
         <member name="T:OpenQA.Selenium.Remote.RemoteWebDriver.RemoteNavigation">
             <summary>

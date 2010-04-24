@@ -393,10 +393,47 @@
             </summary>
             <param name="name">The name of the cookie that is in the browser.</param>
         </member>
+        <member name="M:OpenQA.Selenium.IE.InternetExplorerDriver.InternetExplorerOptions.Timeouts">
+            <summary>
+            Provides access to the timeouts defined for this driver.
+            </summary>
+            <returns>An object implementing the <see cref="T:OpenQA.Selenium.ITimeouts"/> interface.</returns>
+        </member>
         <member name="P:OpenQA.Selenium.IE.InternetExplorerDriver.InternetExplorerOptions.Speed">
             <summary>
             Gets or sets the speed with which actions are executed in the browser.
             </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.IE.InternetExplorerDriver.InternetExplorerOptions.InternetExplorerTimeouts">
+            <summary>
+            Defines the interface through which the user can define timeouts.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.InternetExplorerDriver.InternetExplorerOptions.InternetExplorerTimeouts.#ctor(OpenQA.Selenium.IE.InternetExplorerDriver)">
+            <summary>
+            Initializes a new instance of the InternetExplorerTimeouts class
+            </summary>
+            <param name="driver">The driver that is currently in use</param>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.InternetExplorerDriver.InternetExplorerOptions.InternetExplorerTimeouts.ImplicitlyWait(System.TimeSpan)">
+            <summary>
+            Specifies the amount of time the driver should wait when searching for an
+            element if it is not immediately present.
+            </summary>
+            <param name="timeToWait">A <see cref="T:System.TimeSpan"/> structure defining the amount of time to wait.</param>
+            <returns>A self reference</returns>
+            <remarks>
+            When searching for a single element, the driver should poll the page
+            until the element has been found, or this timeout expires before throwing
+            a <see cref="!:ElementNotFoundException"/>. When searching for multiple elements,
+            the driver should poll the page until at least one element has been found
+            or this timeout has expired.
+            <para>
+            Increasing the implicit wait timeout should be used judiciously as it
+            will have an adverse effect on test run time, especially when used with
+            slower location strategies like XPath.
+            </para>
+            </remarks>
         </member>
         <member name="T:OpenQA.Selenium.IE.InternetExplorerDriver.InternetExplorerTargetLocator">
             <summary>
@@ -928,6 +965,14 @@
             </summary>
             <param name="driverHandle">A handle to the instance of the <see cref="T:OpenQA.Selenium.IE.InternetExplorerDriver"/> class.</param>
             <param name="screenshotWrapperHandle">A pointer to a string containing the screenshot.</param>
+            <returns>A <see cref="T:OpenQA.Selenium.WebDriverResult"/> value indicating success or failure.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.NativeDriverLibrary.SetImplicitWaitTimeout(OpenQA.Selenium.IE.SafeInternetExplorerDriverHandle,System.Int32)">
+            <summary>
+            Sets the timeout used for implicitly waiting for an element to appear on the page.
+            </summary>
+            <param name="driverHandle">A handle to the instance of the <see cref="T:OpenQA.Selenium.IE.InternetExplorerDriver"/> class.</param>
+            <param name="timeoutInMillis">The amount of time, in milliseconds, before returning that an element was not found.</param>
             <returns>A <see cref="T:OpenQA.Selenium.WebDriverResult"/> value indicating success or failure.</returns>
         </member>
         <member name="M:OpenQA.Selenium.IE.NativeDriverLibrary.ClickElement(OpenQA.Selenium.IE.SafeInternetExplorerWebElementHandle)">

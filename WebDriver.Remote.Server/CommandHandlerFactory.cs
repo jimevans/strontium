@@ -175,6 +175,7 @@ namespace OpenQA.Selenium.Remote.Server
             handlers.Add(DriverCommand.GetElementValueOfCssProperty, GetConstructor(typeof(GetElementValueOfCssPropertyHandler)));
             handlers.Add(DriverCommand.ElementEquals, GetConstructor(typeof(ElementEqualsHandler)));
             handlers.Add(DriverCommand.Screenshot, GetConstructor(typeof(ScreenshotHandler)));
+            handlers.Add(DriverCommand.ImplicitlyWait, GetConstructor(typeof(ImplicitlyWaitHandler)));
         }
         #endregion
     }

@@ -689,6 +689,12 @@
             Deletes all cookies from the page.
             </summary>
         </member>
+        <member name="M:OpenQA.Selenium.IOptions.Timeouts">
+            <summary>
+            Provides access to the timeouts defined for this driver.
+            </summary>
+            <returns>An object implementing the <see cref="T:OpenQA.Selenium.ITimeouts"/> interface.</returns>
+        </member>
         <member name="P:OpenQA.Selenium.IOptions.Speed">
             <summary>
             Gets or sets a value representing the speed with which user interactions 
@@ -983,6 +989,31 @@
             </summary>
             <returns>An <see cref="T:OpenQA.Selenium.IWebElement"/> instance representing the element 
             with the focus, or the body element if no element with focus can be detected.</returns>
+        </member>
+        <member name="T:OpenQA.Selenium.ITimeouts">
+            <summary>
+            Defines the interface through which the user can define timeouts.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.ITimeouts.ImplicitlyWait(System.TimeSpan)">
+            <summary>
+            Specifies the amount of time the driver should wait when searching for an
+            element if it is not immediately present.
+            </summary>
+            <param name="timeToWait">A <see cref="T:System.TimeSpan"/> structure defining the amount of time to wait.</param>
+            <returns>A self reference</returns>
+            <remarks>
+            When searching for a single element, the driver should poll the page
+            until the element has been found, or this timeout expires before throwing
+            a <see cref="T:OpenQA.Selenium.NoSuchElementException"/>. When searching for multiple elements,
+            the driver should poll the page until at least one element has been found
+            or this timeout has expired.
+            <para>
+            Increasing the implicit wait timeout should be used judiciously as it
+            will have an adverse effect on test run time, especially when used with
+            slower location strategies like XPath.
+            </para>
+            </remarks>
         </member>
         <member name="T:OpenQA.Selenium.IWebDriver">
             <summary>

@@ -53,7 +53,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// </summary>
         /// <returns>An array of <see cref="Dictionary{K, V}"/> objects containing
         /// representations of the cookies set for the current driver session.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             List<Dictionary<string, object>> cookieList = new List<Dictionary<string, object>>();
             ReadOnlyCollection<Cookie> allCookies = Session.Driver.Manage().GetCookies();

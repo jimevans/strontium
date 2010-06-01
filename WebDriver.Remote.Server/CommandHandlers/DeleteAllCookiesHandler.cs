@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Deletes all cookies associated with the current driver session.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             Session.Driver.Manage().DeleteAllCookies();
             return null;

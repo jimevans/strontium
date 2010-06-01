@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public SetSpeedHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            string desiredSpeedName = GetParameter("speed", parameters).ToString();
+            string desiredSpeedName = GetCommandParameter("speed").ToString();
             desiredSpeed = Speed.FromString(desiredSpeedName);
         }
 
@@ -56,7 +56,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Sets the mouse speed of the current driver session. Valid values are FAST, MEDIUM, or SLOW.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             Session.Driver.Manage().Speed = desiredSpeed;
             return null;

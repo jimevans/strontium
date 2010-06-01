@@ -53,7 +53,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Gets the location of the element referenced by this <see cref="CommandHandler"/>.
         /// </summary>
         /// <returns>A <see cref="Dictionary{K, V}"/> containing the coordinates of the element location.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IRenderedWebElement renderedElement = GetRenderedElement();
             Point elementLocation = renderedElement.Location;

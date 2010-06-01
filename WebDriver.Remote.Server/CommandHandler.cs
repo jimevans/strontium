@@ -59,6 +59,8 @@ namespace OpenQA.Selenium.Remote.Server
         #region Private members
         private HttpStatusCode handlerStatusCode = HttpStatusCode.OK;
         private SessionId handlerSessionId;
+        private Dictionary<string, string> locatorParameters;
+        private Dictionary<string, object> commandParameters;
         #endregion
 
         #region Constructor
@@ -69,6 +71,8 @@ namespace OpenQA.Selenium.Remote.Server
         /// <param name="parameters">A <see cref="Dictionary{K, V}"/> containing the parameters used to operate on the resource.</param>
         protected CommandHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
         {
+            this.locatorParameters = locatorParameters;
+            this.commandParameters = parameters;
         }
         #endregion
 
@@ -104,10 +108,9 @@ namespace OpenQA.Selenium.Remote.Server
         /// Gets a locator parameter from the set of parameters used to locate the resource via the URL.
         /// </summary>
         /// <param name="parameterName">The name of the parameter to get the value of.</param>
-        /// <param name="locatorParameters">A <see cref="Dictionary{K, V}"/> containing the locator parameters.</param>
         /// <returns>The value of the parameter.</returns>
         /// <exception cref="ResourceNotFoundException">Thrown if the parameter is not found in the dictionary of parameters.</exception>
-        protected static string GetLocatorParameter(string parameterName, Dictionary<string, string> locatorParameters)
+        protected string GetLocatorParameter(string parameterName)
         {
             if (!locatorParameters.ContainsKey(parameterName))
             {
@@ -122,17 +125,16 @@ namespace OpenQA.Selenium.Remote.Server
         /// Gets a locator parameter from the set of parameters sent in the body of the request and used to operate on the resource.
         /// </summary>
         /// <param name="parameterName">The name of the parameter to get the value of.</param>
-        /// <param name="parameters">A <see cref="Dictionary{K, V}"/> containing the parameters.</param>
         /// <returns>The value of the parameter.</returns>
         /// <exception cref="InvalidParameterException">Thrown if the parameter is not found in the dictionary of parameters.</exception>
-        protected static object GetParameter(string parameterName, Dictionary<string, object> parameters)
+        protected object GetCommandParameter(string parameterName)
         {
-            if (!parameters.ContainsKey(parameterName))
+            if (!commandParameters.ContainsKey(parameterName))
             {
                 throw new InvalidParameterException("Parameter '" + parameterName + "' not found");
             }
 
-            return parameters[parameterName];
+            return commandParameters[parameterName];
         }
         #endregion
     }

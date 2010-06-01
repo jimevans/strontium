@@ -51,7 +51,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Gets the title of the page in the current driver session.
         /// </summary>
         /// <returns>The title of the page in the current driver session.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             string title = Session.Driver.Title;
             return title;

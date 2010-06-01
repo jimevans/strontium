@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public SendKeysToElementHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            keysToSend = ParseKeystrokes(parameters);
+            keysToSend = ParseKeystrokes();
         }
 
         /// <summary>
@@ -55,17 +55,17 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Sends keys to the element referenced by this <see cref="CommandHandler"/>.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IWebElement element = GetElement();
             element.SendKeys(keysToSend);
             return null;
         }
 
-        private static string ParseKeystrokes(Dictionary<string, object> parameters)
+        private string ParseKeystrokes()
         {
             string keystrokes = string.Empty;
-            object keystrokeObject = GetParameter("value", parameters);
+            object keystrokeObject = GetCommandParameter("value");
             object[] keystrokeArray = keystrokeObject as object[];
             if (keystrokeArray != null)
             {

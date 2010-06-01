@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Selects the element referenced by this <see cref="CommandHandler"/>.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IWebElement element = GetElement();
             element.Select();

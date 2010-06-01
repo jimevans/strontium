@@ -29,7 +29,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
     /// </summary>
     internal class ImplicitlyWaitHandler : WebDriverCommandHandler
     {
-        private int timeout;
+        double milliseconds;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImplicitlyWaitHandler"/> class.
@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public ImplicitlyWaitHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            timeout = Convert.ToInt32(parameters["ms"]);
+            milliseconds = (double)GetCommandParameter("ms");
         }
 
         /// <summary>
@@ -48,17 +48,17 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "[set implicitly wait timeout: {0}]", timeout.ToString());
+            return string.Format(CultureInfo.InvariantCulture, "[implicitly wait: {0}]", milliseconds);
         }
 
         /// <summary>
-        /// Sets the timeout for implicit waits for an element to appear.
+        /// Clicks the element associated with this <see cref="CommandHandler"/>.
         /// </summary>
-        /// <returns>The timeout manager as expresssed via an object implementing the ITimeouts interface.</returns>
-        internal override object Execute()
+        /// <returns>This command always returns <see langword="null"/>.</returns>
+        public override object Execute()
         {
-            ITimeouts timeoutManager = Session.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromMilliseconds(timeout));
-            return timeoutManager;
+            Session.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromMilliseconds(milliseconds));
+            return null;
         }
     }
 }

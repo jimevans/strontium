@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public ChangeUrlHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            targetUrl = GetParameter("url", parameters).ToString();
+            targetUrl = GetCommandParameter("url").ToString();
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Navigates to a new URL.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             Session.Driver.Url = targetUrl;
             return null;

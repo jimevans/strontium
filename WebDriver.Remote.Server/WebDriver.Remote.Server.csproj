@@ -44,18 +44,22 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="WebDriver.Remote, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="WebDriver.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\WebDriver.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Remote, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\WebDriver.Remote.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandHandler.cs" />
     <Compile Include="CommandHandlerFactory.cs" />
     <Compile Include="CommandHandlers\ImplicitlyWaitHandler.cs" />
     <Compile Include="CommandHandlers\DescribeElementHandler.cs" />
     <Compile Include="CommandHandlers\DefineDriverMappingHandler.cs" />
     <Compile Include="CommandHandlers\ClickElementHandler.cs" />
     <Compile Include="CommandHandlers\ClearElementHandler.cs" />
-    <Compile Include="CommandHandlers\CommandNotImplementedHandler.cs" />
     <Compile Include="CommandHandlers\CloseHandler.cs" />
     <Compile Include="CommandHandlers\AddCookieHandler.cs" />
     <Compile Include="CommandHandlers\ScreenshotHandler.cs" />
@@ -105,71 +109,69 @@
     <Compile Include="CommandHandlers\WebDriverCommandHandler.cs" />
     <Compile Include="DriverFactory.cs" />
     <Compile Include="DriverRegistrationFailedEventArgs.cs" />
-    <Compile Include="Exceptions\InvalidCommandException.cs" />
-    <Compile Include="Exceptions\InvalidParameterException.cs" />
-    <Compile Include="Exceptions\ResourceNotFoundException.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Logger.cs" />
     <Compile Include="KnownElementRepository.cs" />
-    <Compile Include="Loggers\ConsoleLogger.cs" />
-    <Compile Include="Loggers\NullLogger.cs" />
-    <Compile Include="LogLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteServer.cs" />
-    <Compile Include="ServerResponse.cs" />
     <Compile Include="DriverSession.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="CommandHandlers\WebElementCommandHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Libraries\Ionic.Zip.Reduced.dll">
+    <Content Include="DriverLibraries\Ionic.Zip.Reduced.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\Newtonsoft.Json.Net20.dll">
+    <Content Include="DriverLibraries\Newtonsoft.Json.Net20.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\WebDriver.Chrome.dll">
+    <Content Include="DriverLibraries\WebDriver.Chrome.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\WebDriver.Chrome.pdb">
+    <Content Include="DriverLibraries\WebDriver.Chrome.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\WebDriver.Chrome.xml">
+    <Content Include="DriverLibraries\WebDriver.Chrome.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\WebDriver.Common.dll">
+    <Content Include="DriverLibraries\WebDriver.Common.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\WebDriver.Common.pdb">
+    <Content Include="DriverLibraries\WebDriver.Common.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\WebDriver.Common.xml">
+    <Content Include="DriverLibraries\WebDriver.Common.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\WebDriver.Firefox.dll">
+    <Content Include="DriverLibraries\WebDriver.Firefox.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\WebDriver.Firefox.pdb">
+    <Content Include="DriverLibraries\WebDriver.Firefox.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\WebDriver.Firefox.xml">
+    <Content Include="DriverLibraries\WebDriver.Firefox.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\WebDriver.IE.dll">
+    <Content Include="DriverLibraries\WebDriver.IE.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\WebDriver.IE.pdb">
+    <Content Include="DriverLibraries\WebDriver.IE.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\WebDriver.IE.xml">
+    <Content Include="DriverLibraries\WebDriver.IE.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\WebDriver.Remote.dll">
+    <Content Include="DriverLibraries\WebDriver.Remote.dll">
     </Content>
-    <Content Include="Libraries\WebDriver.Remote.pdb">
+    <Content Include="DriverLibraries\WebDriver.Remote.pdb">
     </Content>
-    <Content Include="Libraries\WebDriver.Remote.xml">
+    <Content Include="DriverLibraries\WebDriver.Remote.xml">
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebDriver.Remote.Server.Common\WebDriver.Remote.Server.Common.csproj">
+      <Project>{FF46A4DA-9590-475C-9B54-0F341514CFC4}</Project>
+      <Name>WebDriver.Remote.Server.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -40,7 +40,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public DefineDriverMappingHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            Dictionary<string, object> capabilitiesDictionary = GetParameter("capabilities", parameters) as Dictionary<string, object>;
+            Dictionary<string, object> capabilitiesDictionary = GetCommandParameter("capabilities") as Dictionary<string, object>;
             if (capabilitiesDictionary == null)
             {
                 throw new InvalidParameterException("Parameter 'capabilities' is not a dictionary");
@@ -55,7 +55,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
                 throw new InvalidParameterException("Error found parsing parameter 'desiredCapabilities': " + ex.Message, ex);
             }
 
-            className = GetParameter("class", parameters).ToString();
+            className = GetCommandParameter("class").ToString();
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Defines a new driver mapping for the server.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             SessionManager.Instance.RegisterDriver(capabilities, className);
             return null;

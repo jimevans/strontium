@@ -346,6 +346,11 @@
             Gets the source of the page last loaded by the browser.
             </summary>
         </member>
+        <member name="P:OpenQA.Selenium.IE.InternetExplorerDriver.IsJavaScriptEnabled">
+            <summary>
+            Gets a value indicating whether JavaScript is enabled for this browser.
+            </summary>
+        </member>
         <member name="T:OpenQA.Selenium.IE.InternetExplorerDriver.InternetExplorerOptions">
             <summary>
             Provides a mechanism for setting options needed for the driver during the test.

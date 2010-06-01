@@ -331,6 +331,11 @@
             </para>
             </remarks>
         </member>
+        <member name="P:OpenQA.Selenium.IJavaScriptExecutor.IsJavaScriptEnabled">
+            <summary>
+            Gets a value indicating whether JavaScript is enabled for this browser.
+            </summary>
+        </member>
         <member name="T:OpenQA.Selenium.IllegalLocatorException">
             <summary>
             The exception that is thrown when an attempt is made to locate an item using invalid criteria.
@@ -609,6 +614,27 @@
             <summary>
             Gets the <see cref="T:OpenQA.Selenium.IWebElement"/> wrapped by this object.
             </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Internal.ResourceUtilities">
+            <summary>
+            Encapsulates methods for finding and extracting WebDriver resources.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Internal.ResourceUtilities.GetResourceStream(System.String,System.String)">
+            <summary>
+            Gets a <see cref="T:System.IO.Stream"/> that contains the resource to use.
+            </summary>
+            <param name="fileName">A file name in the file system containing the resource to use. 
+            It should be located in the same directory as the executing assembly.</param>
+            <param name="resourceId">A string representing the resource name embedded in the
+            executing assembly, if it is not found in the file system.</param>
+            <returns>A Stream from which the resource can be read.</returns>
+            <exception cref="T:OpenQA.Selenium.WebDriverException">Thrown if neither the file nor the embedded resource can be found.</exception>
+            <remarks>
+            We assume either (1) the .zip file exists in the same directory as the calling assembly
+            (which should be the browser-specific driver assembly), or (2) it exists inside the calling
+            assembly as an embedded resource.
+            </remarks>
         </member>
         <member name="T:OpenQA.Selenium.Internal.ReturnedCookie">
             <summary>

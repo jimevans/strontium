@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// </summary>
         /// <returns>A <see cref="Dictionary{K, V}"/> containing a key of "ELEMENT" and the value
         /// containing the ID of the active element.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IWebElement activeElement = Session.Driver.SwitchTo().ActiveElement();
             Dictionary<string, object> element = WrapElement(activeElement);

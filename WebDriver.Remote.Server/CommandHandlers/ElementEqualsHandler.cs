@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public ElementEqualsHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            otherElementId = GetLocatorParameter(OtherParameterName, locatorParameters);
+            otherElementId = GetLocatorParameter(OtherParameterName);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Determines whether two elements are equal.
         /// </summary>
         /// <returns><see langword="true"/> if the elements are equal, otherwise <see langword="false"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IWebElement element = GetElement();
             IWebElement otherElement = Session.KnownElements.GetElement(otherElementId);

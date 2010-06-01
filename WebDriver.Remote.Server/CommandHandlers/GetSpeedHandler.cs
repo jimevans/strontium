@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// </summary>
         /// <returns>A string representing the mouse speed of the session. The string will
         /// have a value of SLOW, MEDIUM, or FAST.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             Speed currentSpeed = Session.Driver.Manage().Speed;
             return currentSpeed.Description.ToUpperInvariant();

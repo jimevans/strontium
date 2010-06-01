@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Describes the element associated with this <see cref="CommandHandler"/>.
         /// </summary>
         /// <returns>The behavior of this command is undefined, though it is reserved by the JSON wire protocol specification.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             return ElementId;
         }

@@ -53,7 +53,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Gets the location of the element referenced by this <see cref="CommandHandler"/> when scrolled into view.
         /// </summary>
         /// <returns>A <see cref="Dictionary{K, V}"/> containing the coordinates of the element location.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IWebElement element = GetElement();
             ILocatable locatableElement = element as ILocatable;

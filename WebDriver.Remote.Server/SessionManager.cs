@@ -31,7 +31,7 @@ namespace OpenQA.Selenium.Remote.Server
     /// </summary>
     internal class SessionManager
     {
-        private const string LibraryPath = "Libraries";
+        private const string LibraryPath = "DriverLibraries";
         private static object lockObject = new object();
         private static SessionManager managerInstance;
         private Dictionary<SessionId, DriverSession> sessionDictionary = new Dictionary<SessionId, DriverSession>();

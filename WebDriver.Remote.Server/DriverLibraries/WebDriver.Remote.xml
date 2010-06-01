@@ -1142,6 +1142,11 @@
             Gets the capabilities that the RemoteWebDriver instance is currently using
             </summary>
         </member>
+        <member name="P:OpenQA.Selenium.Remote.RemoteWebDriver.IsJavaScriptEnabled">
+            <summary>
+            Gets a value indicating whether JavaScript is enabled for this browser.
+            </summary>
+        </member>
         <member name="P:OpenQA.Selenium.Remote.RemoteWebDriver.CommandExecutor">
             <summary>
             Gets the <see cref="T:OpenQA.Selenium.Remote.ICommandExecutor"/> which executes commands for this driver.

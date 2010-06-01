@@ -40,7 +40,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public DeleteCookieNamedHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            name = GetLocatorParameter(NameParameterName, locatorParameters);
+            name = GetLocatorParameter(NameParameterName);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Deletes a cookie with a given name from the current driver session.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             Session.Driver.Manage().DeleteCookieNamed(name);
             return null;

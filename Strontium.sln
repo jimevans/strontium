@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriver.Remote.Server", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriverRemoteServer", "WebDriverRemoteServer\WebDriverRemoteServer.csproj", "{EB77DBA1-8884-41D5-B398-CABBDF72ED33}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriver.Remote.Server.Common", "WebDriver.Remote.Server.Common\WebDriver.Remote.Server.Common.csproj", "{FF46A4DA-9590-475C-9B54-0F341514CFC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{EB77DBA1-8884-41D5-B398-CABBDF72ED33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB77DBA1-8884-41D5-B398-CABBDF72ED33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB77DBA1-8884-41D5-B398-CABBDF72ED33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF46A4DA-9590-475C-9B54-0F341514CFC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF46A4DA-9590-475C-9B54-0F341514CFC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF46A4DA-9590-475C-9B54-0F341514CFC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF46A4DA-9590-475C-9B54-0F341514CFC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

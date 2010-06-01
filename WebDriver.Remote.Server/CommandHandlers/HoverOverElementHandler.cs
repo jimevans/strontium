@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Hovers the mouse over the element specified by this <see cref="CommandHandler"/>.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IRenderedWebElement renderedElement = GetRenderedElement();
             renderedElement.Hover();

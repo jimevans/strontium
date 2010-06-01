@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Gets whether the element referenced by this <see cref="CommandHandler"/> is displayed.
         /// </summary>
         /// <returns><see langword="true"/> if the element is displayed, otherwise <see langword="false"/></returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IRenderedWebElement renderedElement = GetRenderedElement();
             bool isElementDisplayed = renderedElement.Displayed;

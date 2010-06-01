@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Gets whether the element referenced by this <see cref="CommandHandler"/> is selected.
         /// </summary>
         /// <returns><see langword="true"/> if the element is selected, otherwise <see langword="false"/></returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IWebElement element = GetElement();
             bool isElementSelected = element.Selected;

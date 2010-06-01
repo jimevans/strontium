@@ -34,7 +34,7 @@ namespace OpenQA.Selenium.Remote.Server
 {
     internal class Program
     {
-        private static RemoteServer httpServer;
+        private static RemoteWebDriverServer httpServer;
         private static ConsoleLogger logger = new ConsoleLogger(LogLevel.Info);
         private static string userName = string.Empty;
         private static string password = string.Empty;
@@ -57,7 +57,7 @@ namespace OpenQA.Selenium.Remote.Server
                 LogVersionDetails(commandLineOptions);
                 userName = commandLineOptions.UserName;
                 password = commandLineOptions.Password;
-                httpServer = new RemoteServer(commandLineOptions.Port, "wd/hub/", logger);
+                httpServer = new RemoteWebDriverServer(commandLineOptions.Port, "wd/hub/", logger);
                 bool urlReservationExists = CheckForUrlReservation(commandLineOptions);
                 if (urlReservationExists)
                 {

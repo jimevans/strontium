@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public SwitchToWindowHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            windowName = GetParameter("name", parameters).ToString();
+            windowName = GetCommandParameter("name").ToString();
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Switches focus to the specified window in the current driver session.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             Session.Driver.SwitchTo().Window(windowName);
             return null;

@@ -40,8 +40,8 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public FindElementHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            mechanism = GetParameter("using", parameters).ToString();
-            findValue = GetParameter("value", parameters).ToString();
+            mechanism = GetCommandParameter("using").ToString();
+            findValue = GetCommandParameter("value").ToString();
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// </summary>
         /// <returns>A <see cref="Dictionary{K, V}"/> containing a key of "ELEMENT" and the value
         /// containing the ID of the element meeting the criteria.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             By finder = GetLocator(mechanism, findValue);
 

@@ -51,7 +51,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Gets the current URL for the current driver session.
         /// </summary>
         /// <returns>The current URL for the current driver session.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             string currentUrl = Session.Driver.Url;
             return currentUrl;

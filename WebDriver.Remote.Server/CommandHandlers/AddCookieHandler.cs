@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public AddCookieHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            Dictionary<string, object> rawCookie = GetParameter("cookie", parameters) as Dictionary<string, object>;
+            Dictionary<string, object> rawCookie = GetCommandParameter("cookie") as Dictionary<string, object>;
             cookieToAdd = ProcessCookieParameter(rawCookie);
         }
 
@@ -56,7 +56,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Adds a cookie to the current driver.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             Session.Driver.Manage().AddCookie(cookieToAdd);
             return null;

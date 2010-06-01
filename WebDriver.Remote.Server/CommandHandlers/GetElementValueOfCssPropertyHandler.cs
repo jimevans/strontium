@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public GetElementValueOfCssPropertyHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            propertyName = GetLocatorParameter(CssPropertyNameParameterName, locatorParameters);
+            propertyName = GetLocatorParameter(CssPropertyNameParameterName);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Gets the value of the specified CSS property of the element referenced by this <see cref="CommandHandler"/>.
         /// </summary>
         /// <returns>The CSS property value of the element.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IRenderedWebElement element = GetRenderedElement();
             string propertyValue = element.GetValueOfCssProperty(propertyName);

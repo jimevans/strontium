@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public GetElementAttributeHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            attributeName = GetLocatorParameter(NameParameterName, locatorParameters);
+            attributeName = GetLocatorParameter(NameParameterName);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Gets the attribute value for the specified attribute name of the element referenced by this <see cref="CommandHandler"/>.
         /// </summary>
         /// <returns>The value of the attribute. Returns <see langword="null"/> if the attribute does not exist.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IWebElement element = GetElement();
             string attributeValue = element.GetAttribute(attributeName);

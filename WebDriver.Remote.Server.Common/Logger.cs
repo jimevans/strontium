@@ -37,7 +37,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// <param name="level">A <see cref="LogLevel"/> value specifying the level of messages to log.</param>
         protected Logger(LogLevel level)
         {
-            currentLogLevel = level;
+            this.currentLogLevel = level;
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// <param name="message">The message to write to the log.</param>
         public void Log(string message)
         {
-            Log(message, LogLevel.Info);
+            this.Log(message, LogLevel.Info);
         }
 
         /// <summary>
@@ -56,9 +56,9 @@ namespace OpenQA.Selenium.Remote.Server
         /// <param name="level">The logging level of the message.</param>
         public void Log(string message, LogLevel level)
         {
-            if (level >= currentLogLevel)
+            if (level >= this.currentLogLevel)
             {
-                WriteMessage(FormatLogMessage(message, level));
+                this.WriteMessage(FormatLogMessage(message, level));
             }
         }
 

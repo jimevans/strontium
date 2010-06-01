@@ -51,7 +51,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Navigates forward one entry in the browser history.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             Session.Driver.Navigate().Forward();
             return null;

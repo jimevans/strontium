@@ -51,7 +51,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Gets the current window handle for the current driver session.
         /// </summary>
         /// <returns>A string representing an opaque identifier for the current driver session window.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             string windowHandle = Session.Driver.GetWindowHandle();
             return windowHandle;

@@ -41,8 +41,8 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public ExecuteScriptHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            script = GetParameter("script", parameters).ToString();
-            arguments = GetParameter("args", parameters);
+            script = GetCommandParameter("script").ToString();
+            arguments = GetCommandParameter("args");
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Executes an arbitrary JavaScript function on the page.
         /// </summary>
         /// <returns>The object value returned by the JavaScript function.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IJavaScriptExecutor javascriptDriver = Session.Driver as IJavaScriptExecutor;
 

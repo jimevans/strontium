@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public SwitchToFrameHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            frameId = GetParameter("id", parameters);
+            frameId = GetCommandParameter("id");
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Switches focus to the specified frame in the current driver session.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             if (frameId == null)
             {

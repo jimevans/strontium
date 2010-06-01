@@ -51,7 +51,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Takes a screenshot of the current browser.
         /// </summary>
         /// <returns>A base64-encoded string representing the screenshot image.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             ITakesScreenshot screenshotDriver = Session.Driver as ITakesScreenshot;
             if (screenshotDriver == null)

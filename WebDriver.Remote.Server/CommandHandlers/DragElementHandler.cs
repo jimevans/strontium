@@ -40,8 +40,8 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public DragElementHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            x = int.Parse(GetParameter("x", parameters).ToString(), CultureInfo.InvariantCulture);
-            y = int.Parse(GetParameter("y", parameters).ToString(), CultureInfo.InvariantCulture);
+            x = int.Parse(GetCommandParameter("x").ToString(), CultureInfo.InvariantCulture);
+            y = int.Parse(GetCommandParameter("y").ToString(), CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Drags an element on the page using simulated mouse events.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IRenderedWebElement renderedElement = GetRenderedElement();
             renderedElement.DragAndDropBy(x, y);

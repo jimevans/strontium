@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Gets the page source of the page in the current driver session.
         /// </summary>
         /// <returns>The page source of the page in the current driver session.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             string pageSource = Session.Driver.PageSource;
             return pageSource;

@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Gets the value of the element referenced by this <see cref="CommandHandler"/>.
         /// </summary>
         /// <returns>The value of the element.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IWebElement element = GetElement();
             string elementValue = element.Value;

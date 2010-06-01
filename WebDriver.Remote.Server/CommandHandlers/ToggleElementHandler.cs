@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Toggles the element referenced by this <see cref="CommandHandler"/>.
         /// </summary>
         /// <returns>The toggle state of the element. <see langword="true"/> if the element is toggled on, otherwise <see langword="false"/>.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             IWebElement element = GetElement();
             bool isToggled = element.Toggle();

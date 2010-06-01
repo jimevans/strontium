@@ -53,7 +53,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// </summary>
         /// <returns>An array of string values representing opaque identifiers for
         /// the windows.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             ReadOnlyCollection<string> windowHandles = Session.Driver.GetWindowHandles();
             List<string> windowHandleList = new List<string>(windowHandles);

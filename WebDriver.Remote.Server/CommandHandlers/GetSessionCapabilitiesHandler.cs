@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Gets the capabilities of the current driver session.
         /// </summary>
         /// <returns>A <see cref="Dictionary{K, V}"/> containing the capabilities of the current driver session.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             Dictionary<string, object> capabilitesDictionary = new Dictionary<string, object>();
             ICapabilities capabilities = Session.Capabilities;

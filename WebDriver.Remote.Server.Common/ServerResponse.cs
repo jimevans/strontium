@@ -42,11 +42,11 @@ namespace OpenQA.Selenium.Remote.Server
         /// <param name="status">An <see cref="HttpStatusCode"/> value to set the status code of the HTTP repsonse.</param>
         internal ServerResponse(Response responseToReturn, HttpStatusCode status)
         {
-            returnedResponse = responseToReturn;
-            statusCode = status;
-            if (statusCode >= HttpStatusCode.BadRequest && statusCode < HttpStatusCode.InternalServerError)
+            this.returnedResponse = responseToReturn;
+            this.statusCode = status;
+            if (this.statusCode >= HttpStatusCode.BadRequest && this.statusCode < HttpStatusCode.InternalServerError)
             {
-                contentType = "text/plain";
+                this.contentType = "text/plain";
             }
         }
 
@@ -55,7 +55,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// </summary>
         internal Response ReturnedResponse
         {
-            get { return returnedResponse; }
+            get { return this.returnedResponse; }
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// </summary>
         internal HttpStatusCode StatusCode
         {
-            get { return statusCode; }
+            get { return this.statusCode; }
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// </summary>
         internal string ContentType
         {
-            get { return contentType; }
+            get { return this.contentType; }
         }
     }
 }

@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public NewSessionHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            Dictionary<string, object> capabilitiesDictionary = GetParameter("desiredCapabilities", parameters) as Dictionary<string, object>;
+            Dictionary<string, object> capabilitiesDictionary = GetCommandParameter("desiredCapabilities") as Dictionary<string, object>;
             if (capabilitiesDictionary == null)
             {
                 throw new InvalidParameterException("Parameter 'desiredCapabilities' is not a dictionary");
@@ -58,7 +58,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <summary>
         /// Gets the <see cref="HttpStatusCode"/> to be returned to the client.
         /// </summary>
-        internal override HttpStatusCode StatusCode
+        public override HttpStatusCode StatusCode
         {
             get { return HttpStatusCode.SeeOther; }
         }
@@ -76,7 +76,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Creates a new driver session meeting the specified capabilities.
         /// </summary>
         /// <returns>A string value containing the unique ID of the session.</returns>
-        internal override object Execute()
+        public override object Execute()
         {
             this.SessionId = SessionManager.Instance.CreateSession(capabilities);
             return this.SessionId.ToString();

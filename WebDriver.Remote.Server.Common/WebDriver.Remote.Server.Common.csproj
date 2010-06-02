@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\WebDriver.Remote.Server.Common.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,9 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\WebDriver.Common.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver.Remote, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="WebDriver.Remote.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\WebDriver.Remote.dll</HintPath>
+      <HintPath>..\Dependencies\WebDriver.Remote.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

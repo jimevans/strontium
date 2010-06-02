@@ -30,63 +30,65 @@ namespace OpenQA.Selenium.Remote.Server
     /// </summary>
     internal class RemoteWebDriverServerCommandHandlerFactory : CommandHandlerFactory
     {
+        /// <summary>
+        /// Adds handler constructors to the dictionary of handler creators.
+        /// </summary>
         protected override void AddHandlers()
         {
             // We could reduce the coupling of classes by loading the types
             // dynamically using strings instead of the typeof operator; 
             // however, this is marginally faster.
-            Handlers.Add(DriverCommand.DefineDriverMapping, GetConstructor(typeof(DefineDriverMappingHandler)));
-            Handlers.Add(DriverCommand.NewSession, GetConstructor(typeof(NewSessionHandler)));
-            Handlers.Add(DriverCommand.GetSessionCapabilities, GetConstructor(typeof(GetSessionCapabilitiesHandler)));
-            Handlers.Add(DriverCommand.Close, GetConstructor(typeof(CloseHandler)));
-            Handlers.Add(DriverCommand.Quit, GetConstructor(typeof(QuitHandler)));
-            Handlers.Add(DriverCommand.Get, GetConstructor(typeof(ChangeUrlHandler)));
-            Handlers.Add(DriverCommand.GoBack, GetConstructor(typeof(GoBackHandler)));
-            Handlers.Add(DriverCommand.GoForward, GetConstructor(typeof(GoForwardHandler)));
-            Handlers.Add(DriverCommand.Refresh, GetConstructor(typeof(RefreshHandler)));
-            Handlers.Add(DriverCommand.AddCookie, GetConstructor(typeof(AddCookieHandler)));
-            Handlers.Add(DriverCommand.GetAllCookies, GetConstructor(typeof(GetAllCookiesHandler)));
-            Handlers.Add(DriverCommand.DeleteCookie, GetConstructor(typeof(DeleteCookieNamedHandler)));
-            Handlers.Add(DriverCommand.DeleteAllCookies, GetConstructor(typeof(DeleteAllCookiesHandler)));
-            Handlers.Add(DriverCommand.FindElement, GetConstructor(typeof(FindElementHandler)));
-            Handlers.Add(DriverCommand.FindElements, GetConstructor(typeof(FindElementsHandler)));
-            Handlers.Add(DriverCommand.FindChildElement, GetConstructor(typeof(FindChildElementHandler)));
-            Handlers.Add(DriverCommand.FindChildElements, GetConstructor(typeof(FindChildElementsHandler)));
-            Handlers.Add(DriverCommand.DescribeElement, GetConstructor(typeof(DescribeElementHandler)));
-            Handlers.Add(DriverCommand.ClearElement, GetConstructor(typeof(ClearElementHandler)));
-            Handlers.Add(DriverCommand.ClickElement, GetConstructor(typeof(ClickElementHandler)));
-            Handlers.Add(DriverCommand.HoverOverElement, GetConstructor(typeof(HoverOverElementHandler)));
-            Handlers.Add(DriverCommand.SendKeysToElement, GetConstructor(typeof(SendKeysToElementHandler)));
-            Handlers.Add(DriverCommand.SubmitElement, GetConstructor(typeof(SubmitElementHandler)));
-            Handlers.Add(DriverCommand.ToggleElement, GetConstructor(typeof(ToggleElementHandler)));
-            Handlers.Add(DriverCommand.GetCurrentWindowHandle, GetConstructor(typeof(GetCurrentWindowHandler)));
-            Handlers.Add(DriverCommand.GetWindowHandles, GetConstructor(typeof(GetAllWindowsHandler)));
-            Handlers.Add(DriverCommand.SwitchToWindow, GetConstructor(typeof(SwitchToWindowHandler)));
-            Handlers.Add(DriverCommand.SwitchToFrame, GetConstructor(typeof(SwitchToFrameHandler)));
-            Handlers.Add(DriverCommand.GetActiveElement, GetConstructor(typeof(GetActiveElementHandler)));
-            Handlers.Add(DriverCommand.GetCurrentUrl, GetConstructor(typeof(GetCurrentUrlHandler)));
-            Handlers.Add(DriverCommand.GetPageSource, GetConstructor(typeof(GetPageSourceHandler)));
-            Handlers.Add(DriverCommand.GetTitle, GetConstructor(typeof(GetTitleHandler)));
-            Handlers.Add(DriverCommand.ExecuteScript, GetConstructor(typeof(ExecuteScriptHandler)));
-            Handlers.Add(DriverCommand.GetSpeed, GetConstructor(typeof(GetSpeedHandler)));
-            Handlers.Add(DriverCommand.SetSpeed, GetConstructor(typeof(SetSpeedHandler)));
-            Handlers.Add(DriverCommand.GetElementText, GetConstructor(typeof(GetElementTextHandler)));
-            Handlers.Add(DriverCommand.GetElementValue, GetConstructor(typeof(GetElementValueHandler)));
-            Handlers.Add(DriverCommand.GetElementTagName, GetConstructor(typeof(GetElementTagNameHandler)));
-            Handlers.Add(DriverCommand.SetElementSelected, GetConstructor(typeof(SetElementSelectedHandler)));
-            Handlers.Add(DriverCommand.DragElement, GetConstructor(typeof(DragElementHandler)));
-            Handlers.Add(DriverCommand.IsElementSelected, GetConstructor(typeof(GetElementSelectedHandler)));
-            Handlers.Add(DriverCommand.IsElementEnabled, GetConstructor(typeof(GetElementEnabledHandler)));
-            Handlers.Add(DriverCommand.IsElementDisplayed, GetConstructor(typeof(GetElementDisplayedHandler)));
-            Handlers.Add(DriverCommand.GetElementLocation, GetConstructor(typeof(GetElementLocationHandler)));
-            Handlers.Add(DriverCommand.GetElementLocationOnceScrolledIntoView, GetConstructor(typeof(GetElementScrolledIntoViewLocationHandler)));
-            Handlers.Add(DriverCommand.GetElementSize, GetConstructor(typeof(GetElementSizeHandler)));
-            Handlers.Add(DriverCommand.GetElementAttribute, GetConstructor(typeof(GetElementAttributeHandler)));
-            Handlers.Add(DriverCommand.GetElementValueOfCssProperty, GetConstructor(typeof(GetElementValueOfCssPropertyHandler)));
-            Handlers.Add(DriverCommand.ElementEquals, GetConstructor(typeof(ElementEqualsHandler)));
-            Handlers.Add(DriverCommand.Screenshot, GetConstructor(typeof(ScreenshotHandler)));
-            Handlers.Add(DriverCommand.ImplicitlyWait, GetConstructor(typeof(ImplicitlyWaitHandler)));
-            handlers.Add(DriverCommand.ImplicitlyWait, GetConstructor(typeof(ImplicitlyWaitHandler)));
+            MapCommandHandler(DriverCommand.DefineDriverMapping, typeof(DefineDriverMappingHandler));
+            MapCommandHandler(DriverCommand.NewSession, typeof(NewSessionHandler));
+            MapCommandHandler(DriverCommand.GetSessionCapabilities, typeof(GetSessionCapabilitiesHandler));
+            MapCommandHandler(DriverCommand.Close, typeof(CloseHandler));
+            MapCommandHandler(DriverCommand.Quit, typeof(QuitHandler));
+            MapCommandHandler(DriverCommand.Get, typeof(ChangeUrlHandler));
+            MapCommandHandler(DriverCommand.GoBack, typeof(GoBackHandler));
+            MapCommandHandler(DriverCommand.GoForward, typeof(GoForwardHandler));
+            MapCommandHandler(DriverCommand.Refresh, typeof(RefreshHandler));
+            MapCommandHandler(DriverCommand.AddCookie, typeof(AddCookieHandler));
+            MapCommandHandler(DriverCommand.GetAllCookies, typeof(GetAllCookiesHandler));
+            MapCommandHandler(DriverCommand.DeleteCookie, typeof(DeleteCookieNamedHandler));
+            MapCommandHandler(DriverCommand.DeleteAllCookies, typeof(DeleteAllCookiesHandler));
+            MapCommandHandler(DriverCommand.FindElement, typeof(FindElementHandler));
+            MapCommandHandler(DriverCommand.FindElements, typeof(FindElementsHandler));
+            MapCommandHandler(DriverCommand.FindChildElement, typeof(FindChildElementHandler));
+            MapCommandHandler(DriverCommand.FindChildElements, typeof(FindChildElementsHandler));
+            MapCommandHandler(DriverCommand.DescribeElement, typeof(DescribeElementHandler));
+            MapCommandHandler(DriverCommand.ClearElement, typeof(ClearElementHandler));
+            MapCommandHandler(DriverCommand.ClickElement, typeof(ClickElementHandler));
+            MapCommandHandler(DriverCommand.HoverOverElement, typeof(HoverOverElementHandler));
+            MapCommandHandler(DriverCommand.SendKeysToElement, typeof(SendKeysToElementHandler));
+            MapCommandHandler(DriverCommand.SubmitElement, typeof(SubmitElementHandler));
+            MapCommandHandler(DriverCommand.ToggleElement, typeof(ToggleElementHandler));
+            MapCommandHandler(DriverCommand.GetCurrentWindowHandle, typeof(GetCurrentWindowHandler));
+            MapCommandHandler(DriverCommand.GetWindowHandles, typeof(GetAllWindowsHandler));
+            MapCommandHandler(DriverCommand.SwitchToWindow, typeof(SwitchToWindowHandler));
+            MapCommandHandler(DriverCommand.SwitchToFrame, typeof(SwitchToFrameHandler));
+            MapCommandHandler(DriverCommand.GetActiveElement, typeof(GetActiveElementHandler));
+            MapCommandHandler(DriverCommand.GetCurrentUrl, typeof(GetCurrentUrlHandler));
+            MapCommandHandler(DriverCommand.GetPageSource, typeof(GetPageSourceHandler));
+            MapCommandHandler(DriverCommand.GetTitle, typeof(GetTitleHandler));
+            MapCommandHandler(DriverCommand.ExecuteScript, typeof(ExecuteScriptHandler));
+            MapCommandHandler(DriverCommand.GetSpeed, typeof(GetSpeedHandler));
+            MapCommandHandler(DriverCommand.SetSpeed, typeof(SetSpeedHandler));
+            MapCommandHandler(DriverCommand.GetElementText, typeof(GetElementTextHandler));
+            MapCommandHandler(DriverCommand.GetElementValue, typeof(GetElementValueHandler));
+            MapCommandHandler(DriverCommand.GetElementTagName, typeof(GetElementTagNameHandler));
+            MapCommandHandler(DriverCommand.SetElementSelected, typeof(SetElementSelectedHandler));
+            MapCommandHandler(DriverCommand.DragElement, typeof(DragElementHandler));
+            MapCommandHandler(DriverCommand.IsElementSelected, typeof(GetElementSelectedHandler));
+            MapCommandHandler(DriverCommand.IsElementEnabled, typeof(GetElementEnabledHandler));
+            MapCommandHandler(DriverCommand.IsElementDisplayed, typeof(GetElementDisplayedHandler));
+            MapCommandHandler(DriverCommand.GetElementLocation, typeof(GetElementLocationHandler));
+            MapCommandHandler(DriverCommand.GetElementLocationOnceScrolledIntoView, typeof(GetElementScrolledIntoViewLocationHandler));
+            MapCommandHandler(DriverCommand.GetElementSize, typeof(GetElementSizeHandler));
+            MapCommandHandler(DriverCommand.GetElementAttribute, typeof(GetElementAttributeHandler));
+            MapCommandHandler(DriverCommand.GetElementValueOfCssProperty, typeof(GetElementValueOfCssPropertyHandler));
+            MapCommandHandler(DriverCommand.ElementEquals, typeof(ElementEqualsHandler));
+            MapCommandHandler(DriverCommand.Screenshot, typeof(ScreenshotHandler));
+            MapCommandHandler(DriverCommand.ImplicitlyWait, typeof(ImplicitlyWaitHandler));
         }
     }
 }

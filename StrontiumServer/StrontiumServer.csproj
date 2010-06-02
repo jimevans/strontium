@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EB77DBA1-8884-41D5-B398-CABBDF72ED33}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StrontiumServer</RootNamespace>
+    <AssemblyName>StrontiumServer</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="HttpApi.cs" />
+    <Compile Include="Internal\ErrorCode.cs" />
+    <Compile Include="Internal\HttpApiConstants.cs" />
+    <Compile Include="Internal\HttpApiVersion.cs" />
+    <Compile Include="Internal\HttpServiceConfigId.cs" />
+    <Compile Include="Internal\HttpServiceConfigIPListenParam.cs" />
+    <Compile Include="Internal\HttpServiceConfigIPListenQuery.cs" />
+    <Compile Include="Internal\HttpServiceConfigQueryType.cs" />
+    <Compile Include="Internal\HttpServiceConfigSslKey.cs" />
+    <Compile Include="Internal\HttpServiceConfigSslParam.cs" />
+    <Compile Include="Internal\HttpServiceConfigSslQuery.cs" />
+    <Compile Include="Internal\HttpServiceConfigSslSet.cs" />
+    <Compile Include="Internal\HttpServiceConfigUrlAclKey.cs" />
+    <Compile Include="Internal\HttpServiceConfigUrlAclParam.cs" />
+    <Compile Include="Internal\HttpServiceConfigUrlAclQuery.cs" />
+    <Compile Include="Internal\HttpServiceConfigUrlAclSet.cs" />
+    <Compile Include="Internal\NativeMethods.cs" />
+    <Compile Include="Options.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebDriver.Remote.Server.Common\WebDriver.Remote.Server.Common.csproj">
+      <Project>{FF46A4DA-9590-475C-9B54-0F341514CFC4}</Project>
+      <Name>WebDriver.Remote.Server.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebDriver.Remote.Server\WebDriver.Remote.Server.csproj">
+      <Project>{D5E01A6E-FA03-45EA-BEC5-12FEC4859403}</Project>
+      <Name>WebDriver.Remote.Server</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

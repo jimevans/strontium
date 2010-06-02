@@ -29,7 +29,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
     /// </summary>
     internal class ImplicitlyWaitHandler : WebDriverCommandHandler
     {
-        double milliseconds;
+        private double milliseconds;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImplicitlyWaitHandler"/> class.

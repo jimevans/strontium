@@ -42,7 +42,7 @@ namespace OpenQA.Selenium.Remote.Server
 
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="RemoteServer"/> class using the specifed port and relative path.
+        /// Initializes a new instance of the <see cref="RemoteWebDriverServer"/> class using the specifed port and relative path.
         /// </summary>
         /// <param name="port">The port to listen on.</param>
         /// <param name="path">The relative path to connect to.</param>
@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RemoteServer"/> class using the specifed port, relative path, and logger.
+        /// Initializes a new instance of the <see cref="RemoteWebDriverServer"/> class using the specifed port, relative path, and logger.
         /// </summary>
         /// <param name="port">The port to listen on.</param>
         /// <param name="path">The relative path to connect to.</param>
@@ -63,11 +63,11 @@ namespace OpenQA.Selenium.Remote.Server
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RemoteServer"/> class using the specifed port, relative path, and logger.
+        /// Initializes a new instance of the <see cref="RemoteWebDriverServer"/> class using the specifed port, relative path, and logger.
         /// </summary>
         /// <param name="port">The port to listen on.</param>
         /// <param name="path">The relative path to connect to.</param>
-        /// <param name="handlerFactory">A <see cref="CommandHandlerFactory>"/> used to create <see cref="CommandHandler"/> instances for handling commands.</param>
+        /// <param name="handlerFactory">A <see cref="CommandHandlerFactory"/> used to create <see cref="CommandHandler"/> instances for handling commands.</param>
         /// <param name="log">A <see cref="Logger"/> object describing how to log information about commands executed.</param>
         private RemoteWebDriverServer(int port, string path, CommandHandlerFactory handlerFactory, Logger log)
             : base(port, path, handlerFactory, log)

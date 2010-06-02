@@ -48,9 +48,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\WebDriver.Common.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver.Remote, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="WebDriver.Remote.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\WebDriver.Remote.dll</HintPath>
+      <HintPath>..\Dependencies\WebDriver.Remote.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -127,44 +127,20 @@
     <Content Include="DriverLibraries\WebDriver.Chrome.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DriverLibraries\WebDriver.Chrome.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DriverLibraries\WebDriver.Chrome.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="DriverLibraries\WebDriver.Common.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DriverLibraries\WebDriver.Common.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DriverLibraries\WebDriver.Common.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="DriverLibraries\WebDriver.Firefox.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DriverLibraries\WebDriver.Firefox.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DriverLibraries\WebDriver.Firefox.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="DriverLibraries\WebDriver.IE.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DriverLibraries\WebDriver.IE.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DriverLibraries\WebDriver.IE.xml">
+    <Content Include="DriverLibraries\WebDriver.Remote.Common.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="DriverLibraries\WebDriver.Remote.dll">
-    </Content>
-    <Content Include="DriverLibraries\WebDriver.Remote.pdb">
-    </Content>
-    <Content Include="DriverLibraries\WebDriver.Remote.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>

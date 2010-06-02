@@ -43,14 +43,9 @@ namespace OpenQA.Selenium.Remote.Server
         protected CommandHandlerFactory()
         {
             this.AddHandlers();
-            this.commandNotImplementedHandlerConstructor = GetConstructor(typeof(CommandNotImplementedHandler));
+            this.commandNotImplementedHandlerConstructor = GetConstructorInfo(typeof(CommandNotImplementedHandler));
         }
         #endregion
-
-        protected Dictionary<DriverCommand, ConstructorInfo> Handlers
-        {
-            get { return handlers; }
-        }
 
         #region Public methods
         /// <summary>
@@ -90,15 +85,32 @@ namespace OpenQA.Selenium.Remote.Server
         /// </summary>
         protected abstract void AddHandlers();
 
+        /// <summary>
+        /// Maps a <see cref="DriverCommand"/> value to a <see cref="CommandHandler"/> object.
+        /// </summary>
+        /// <param name="command">The <see cref="DriverCommand"/> value to map the handler for.</param>
+        /// <param name="handlerType">The <see cref="Type"/> used to handle the command.</param>
+        /// <exception cref="ArgumentException">If <paramref name="handlerType"/> is not a subclass of <see cref="CommandHandler"/>.</exception>
+        protected void MapCommandHandler(DriverCommand command, Type handlerType)
+        {
+            if (!handlerType.IsSubclassOf(typeof(CommandHandler)))
+            {
+                throw new ArgumentException("Type passed in for handler is not descended from CommandHandler", "handlerType");
+            }
+
+            ConstructorInfo constructor = GetConstructorInfo(handlerType);
+            this.handlers.Add(command, constructor);
+        }
+
         #region Private support methods
-        protected static ConstructorInfo GetConstructor(Type handlerType)
+        private static ConstructorInfo GetConstructorInfo(Type handlerType)
         {
             Type[] parameterTypes = new Type[] { typeof(Dictionary<string, string>), typeof(Dictionary<string, object>) };
             ConstructorInfo constructor = handlerType.GetConstructor(parameterTypes);
             return constructor;
         }
 
-        protected ConstructorInfo GetHandlerConstructor(DriverCommand commandName)
+        private ConstructorInfo GetHandlerConstructor(DriverCommand commandName)
         {
             ConstructorInfo handlerConstructor = null;
             if (!this.CanCreateHandler(commandName))

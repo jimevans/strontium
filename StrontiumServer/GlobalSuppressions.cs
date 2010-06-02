@@ -25,5 +25,5 @@ limitations under the License.
 // Error List, point to "Suppress Message(s)", and click 
 // "In Project Suppression File". 
 // You do not need to add suppressions to this file manually. 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Scope = "member", Target = "OpenQA.Selenium.Remote.Server.RemoteWebDriverServerCommandHandlerFactory.#AddHandlers()", Justification = "It's a factory method. Of course it's coupled to a large number of classes.")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Scope = "member", Target = "OpenQA.Selenium.Remote.Server.SessionManager.#.ctor()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "WebDriverRemoteServer.Options.#GetOSVersion()", Justification = "Processor architecture should be normalized to lowercase.")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2205:UseManagedEquivalentsOfWin32Api", Scope = "member", Target = "WebDriverRemoteServer.Internal.NativeMethods.#GetVersionEx(WebDriverRemoteServer.Internal.NativeMethods+OSVersionInfoEx&)", Justification = "OSVersion does not give enough information to yield full platform display.")]

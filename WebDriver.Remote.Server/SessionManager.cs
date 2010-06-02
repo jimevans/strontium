@@ -43,7 +43,6 @@ namespace OpenQA.Selenium.Remote.Server
         private SessionManager()
         {
             sessionDictionary = new Dictionary<SessionId, DriverSession>();
-            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
         }
 
         /// <summary>
@@ -79,7 +78,7 @@ namespace OpenQA.Selenium.Remote.Server
         {
             try
             {
-                Type driverType = Type.GetType(className, true, true);
+                Type driverType = LoadDriverType(className);
                 Type interfaceType = driverType.GetInterface("OpenQA.Selenium.IWebDriver", true);
                 if (interfaceType == null)
                 {
@@ -160,12 +159,34 @@ namespace OpenQA.Selenium.Remote.Server
             return sessionId != null && sessionDictionary.ContainsKey(sessionId);
         }
 
-        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        private static Type LoadDriverType(string typeDescriptor)
         {
-            string currentDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string assemblyName = string.Format(CultureInfo.InvariantCulture, "{0}.dll", args.Name);
-            Assembly assemblyToReturn = Assembly.LoadFile(Path.Combine(Path.Combine(currentDir, LibraryPath), assemblyName));
-            return assemblyToReturn;
+            string[] typeDescriptorParts = typeDescriptor.Split(new char[] { ',' });
+            string typeFriendlyName = typeDescriptorParts[0].Trim();
+            Assembly driverAssembly = null;
+            if (typeDescriptorParts.Length > 1)
+            {
+                string assemblyName = typeDescriptorParts[1].Trim();
+                Assembly[] loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+                foreach (Assembly loadedAssembly in loadedAssemblies)
+                {
+                    if (loadedAssembly.GetName().Name == assemblyName)
+                    {
+                        driverAssembly = loadedAssembly;
+                        break;
+                    }
+                }
+
+                if (driverAssembly == null)
+                {
+                    string currentDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    string assemblyFileName = string.Format(CultureInfo.InvariantCulture, "{0}.dll", assemblyName);
+                    driverAssembly = Assembly.LoadFrom(Path.Combine(Path.Combine(currentDir, LibraryPath), assemblyFileName));
+                }
+            }
+
+            Type driverType = driverAssembly.GetType(typeFriendlyName, true, true);
+            return driverType;
         }
     }
 }

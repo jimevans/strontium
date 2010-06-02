@@ -50,6 +50,7 @@ namespace OpenQA.Selenium.Remote.Server
         private string listenerPrefix;
         private string listenerPath;
         private int listenerPort;
+        private bool listenerStopping;
         #endregion
 
         #region Constructors
@@ -58,7 +59,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// </summary>
         /// <param name="port">The port to listen on.</param>
         /// <param name="path">The relative path to connect to.</param>
-        /// <param name="handlerFactory">A <see cref="CommandHandlerFactory>"/> used to create <see cref="CommandHandler"/> instances for handling commands.</param>
+        /// <param name="handlerFactory">A <see cref="CommandHandlerFactory"/> used to create <see cref="CommandHandler"/> instances for handling commands.</param>
         public RemoteServer(int port, string path, CommandHandlerFactory handlerFactory)
             : this(port, path, handlerFactory, new ConsoleLogger(LogLevel.Info))
         {
@@ -69,7 +70,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// </summary>
         /// <param name="port">The port to listen on.</param>
         /// <param name="path">The relative path to connect to.</param>
-        /// <param name="handlerFactory">A <see cref="CommandHandlerFactory>"/> used to create <see cref="CommandHandler"/> instances for handling commands.</param>
+        /// <param name="handlerFactory">A <see cref="CommandHandlerFactory"/> used to create <see cref="CommandHandler"/> instances for handling commands.</param>
         /// <param name="log">A <see cref="Logger"/> object describing how to log information about commands executed.</param>
         public RemoteServer(int port, string path, CommandHandlerFactory handlerFactory, Logger log)
         {
@@ -94,7 +95,7 @@ namespace OpenQA.Selenium.Remote.Server
         }
         #endregion
 
-        #region Public properties
+        #region Properties
         /// <summary>
         /// Gets the full base URL prefix on which all requests are matched.
         /// </summary>
@@ -102,12 +103,15 @@ namespace OpenQA.Selenium.Remote.Server
         {
             get { return this.listenerPrefix; }
         }
-        #endregion
 
+        /// <summary>
+        /// Gets the logger used for this remote server.
+        /// </summary>
         protected Logger ServerLogger
         {
-            get { return serverLogger; }
+            get { return this.serverLogger; }
         }
+        #endregion
 
         #region Public methods
         /// <summary>
@@ -117,6 +121,7 @@ namespace OpenQA.Selenium.Remote.Server
         {
             try
             {
+                this.listenerStopping = false;
                 this.ConstructDispatcherTables(this.listenerPrefix);
                 this.listener.Prefixes.Add(this.listenerPrefix);
                 this.listener.Start();
@@ -144,6 +149,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// </summary>
         public void StopListening()
         {
+            this.listenerStopping = true;
             if (this.listener.IsListening)
             {
                 this.listener.Stop();
@@ -278,7 +284,10 @@ namespace OpenQA.Selenium.Remote.Server
                 // When we shut the HttpListener down, there will always still be
                 // a thread pending listening for a request. If there is no client
                 // connected, we may have a real problem here.
-                Console.WriteLine("HttpListenerException:" + hle.Message);
+                if (!this.listenerStopping)
+                {
+                    Console.WriteLine("HttpListenerException:" + hle.Message);
+                }
             }
         }
 

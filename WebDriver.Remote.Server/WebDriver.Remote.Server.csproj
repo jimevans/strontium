@@ -54,7 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandHandlerFactory.cs" />
+    <Compile Include="RemoteWebDriverServerCommandHandlerFactory.cs" />
     <Compile Include="CommandHandlers\ImplicitlyWaitHandler.cs" />
     <Compile Include="CommandHandlers\DescribeElementHandler.cs" />
     <Compile Include="CommandHandlers\DefineDriverMappingHandler.cs" />
@@ -112,7 +112,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="KnownElementRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RemoteServer.cs" />
+    <Compile Include="RemoteWebDriverServer.cs" />
     <Compile Include="DriverSession.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="CommandHandlers\WebElementCommandHandler.cs" />

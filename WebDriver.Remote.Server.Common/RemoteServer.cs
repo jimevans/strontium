@@ -60,8 +60,13 @@ namespace OpenQA.Selenium.Remote.Server
         /// <param name="port">The port to listen on.</param>
         /// <param name="path">The relative path to connect to.</param>
         /// <param name="handlerFactory">A <see cref="CommandHandlerFactory"/> used to create <see cref="CommandHandler"/> instances for handling commands.</param>
-        public RemoteServer(int port, string path, CommandHandlerFactory handlerFactory)
+        protected RemoteServer(int port, string path, CommandHandlerFactory handlerFactory)
             : this(port, path, handlerFactory, new ConsoleLogger(LogLevel.Info))
+        {
+        }
+
+        protected RemoteServer(int port, string path, CommandHandlerFactory handlerFactory, Logger log)
+            : this("*", port, path, handlerFactory, log)
         {
         }
 
@@ -72,7 +77,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// <param name="path">The relative path to connect to.</param>
         /// <param name="handlerFactory">A <see cref="CommandHandlerFactory"/> used to create <see cref="CommandHandler"/> instances for handling commands.</param>
         /// <param name="log">A <see cref="Logger"/> object describing how to log information about commands executed.</param>
-        public RemoteServer(int port, string path, CommandHandlerFactory handlerFactory, Logger log)
+        protected RemoteServer(string basePath, int port, string path, CommandHandlerFactory handlerFactory, Logger log)
         {
             this.handlerFactory = handlerFactory;
 
@@ -89,7 +94,7 @@ namespace OpenQA.Selenium.Remote.Server
             }
 
             this.listenerPath = path;
-            this.listenerPrefix = string.Format(CultureInfo.InvariantCulture, "http://*:{0}{1}", this.listenerPort, this.listenerPath);
+            this.listenerPrefix = string.Format(CultureInfo.InvariantCulture, "http://{0}:{1}{2}", basePath, this.listenerPort, this.listenerPath);
 
             this.serverLogger = log;
         }

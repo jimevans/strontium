@@ -1,20 +1,20 @@
-﻿/* Copyright notice and license
-Copyright 2007-2010 WebDriver committers
-Copyright 2007-2010 Google Inc.
-Portions copyright 2007 ThoughtWorks, Inc
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+﻿// <copyright file="RemoteWebDriverServer.cs" company="WebDriver Committers">
+// Copyright 2007-2011 WebDriver committers
+// Copyright 2007-2011 Google Inc.
+// Portions copyright 2007 ThoughtWorks, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// </copyright>
 
 using System;
 using System.Collections.Generic;
@@ -72,8 +72,8 @@ namespace OpenQA.Selenium.Remote.Server
         private RemoteWebDriverServer(int port, string path, CommandHandlerFactory handlerFactory, Logger log)
             : base(port, path, handlerFactory, log)
         {
-            SessionManager.Instance.DriverRegistrationFailed += new EventHandler<DriverRegistrationFailedEventArgs>(Instance_DriverRegistrationFailed);
-            InitializeSessionManager();
+            SessionManager.Instance.DriverRegistrationFailed += new EventHandler<DriverRegistrationFailedEventArgs>(this.Instance_DriverRegistrationFailed);
+            this.InitializeSessionManager();
         }
         #endregion
 
@@ -81,28 +81,28 @@ namespace OpenQA.Selenium.Remote.Server
         private void Instance_DriverRegistrationFailed(object sender, DriverRegistrationFailedEventArgs e)
         {
             string logMessage = string.Format(CultureInfo.InvariantCulture, "Could not register driver with type '{0}'.\nThe reason given was:\n{1}", e.DriverClass, e.Reason);
-            ServerLogger.Log(logMessage, LogLevel.Error);
+            this.ServerLogger.Log(logMessage, LogLevel.Error);
         }
 
         private void InitializeSessionManager()
         {
-            defaultDrivers.Add(DesiredCapabilities.InternetExplorer(), "OpenQA.Selenium.IE.InternetExplorerDriver, WebDriver.IE");
-            defaultDrivers.Add(DesiredCapabilities.Firefox(), "OpenQA.Selenium.Firefox.FirefoxDriver, WebDriver.Firefox");
-            defaultDrivers.Add(DesiredCapabilities.Chrome(), "OpenQA.Selenium.Chrome.ChromeDriver, WebDriver.Chrome");
-            RegisterDefaultDrivers();
+            this.defaultDrivers.Add(DesiredCapabilities.InternetExplorer(), "OpenQA.Selenium.IE.InternetExplorerDriver, WebDriver.IE");
+            this.defaultDrivers.Add(DesiredCapabilities.Firefox(), "OpenQA.Selenium.Firefox.FirefoxDriver, WebDriver.Firefox");
+            this.defaultDrivers.Add(DesiredCapabilities.Chrome(), "OpenQA.Selenium.Chrome.ChromeDriver, WebDriver.Chrome");
+            this.RegisterDefaultDrivers();
         }
 
         private void RegisterDefaultDrivers()
         {
-            foreach (ICapabilities capabilities in defaultDrivers.Keys)
+            foreach (ICapabilities capabilities in this.defaultDrivers.Keys)
             {
-                if (capabilities.Platform != null && Platform.CurrentPlatform.IsPlatformType(capabilities.Platform.Type))
+                if (capabilities.Platform != null && Platform.CurrentPlatform.IsPlatformType(capabilities.Platform.PlatformType))
                 {
-                    SessionManager.Instance.RegisterDriver(capabilities, defaultDrivers[capabilities]);
+                    SessionManager.Instance.RegisterDriver(capabilities, this.defaultDrivers[capabilities]);
                 }
                 else if (capabilities.Platform == null)
                 {
-                    SessionManager.Instance.RegisterDriver(capabilities, defaultDrivers[capabilities]);
+                    SessionManager.Instance.RegisterDriver(capabilities, this.defaultDrivers[capabilities]);
                 }
             }
         }

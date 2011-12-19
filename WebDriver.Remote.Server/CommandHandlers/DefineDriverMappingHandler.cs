@@ -1,20 +1,20 @@
-﻿/* Copyright notice and license
-Copyright 2007-2010 WebDriver committers
-Copyright 2007-2010 Google Inc.
-Portions copyright 2007 ThoughtWorks, Inc
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+﻿// <copyright file="DefineDriverMappingHandler.cs" company="WebDriver Committers">
+// Copyright 2007-2011 WebDriver committers
+// Copyright 2007-2011 Google Inc.
+// Portions copyright 2007 ThoughtWorks, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// </copyright>
 
 using System;
 using System.Collections.Generic;
@@ -48,14 +48,14 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
 
             try
             {
-                capabilities = new DesiredCapabilities(capabilitiesDictionary);
+                this.capabilities = new DesiredCapabilities(capabilitiesDictionary);
             }
             catch (Exception ex)
             {
                 throw new InvalidParameterException("Error found parsing parameter 'desiredCapabilities': " + ex.Message, ex);
             }
 
-            className = GetCommandParameter("class").ToString();
+            this.className = GetCommandParameter("class").ToString();
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "[define driver mapping: {0}]", className);
+            return string.Format(CultureInfo.InvariantCulture, "[define driver mapping: {0}]", this.className);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>This command always returns <see langword="null"/>.</returns>
         public override object Execute()
         {
-            SessionManager.Instance.RegisterDriver(capabilities, className);
+            SessionManager.Instance.RegisterDriver(this.capabilities, this.className);
             return null;
         }
     }

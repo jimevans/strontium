@@ -1,20 +1,20 @@
-﻿/* Copyright notice and license
-Copyright 2007-2010 WebDriver committers
-Copyright 2007-2010 Google Inc.
-Portions copyright 2007 ThoughtWorks, Inc
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+﻿// <copyright file="WebDriverCommandHandler.cs" company="WebDriver Committers">
+// Copyright 2007-2011 WebDriver committers
+// Copyright 2007-2011 Google Inc.
+// Portions copyright 2007 ThoughtWorks, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// </copyright>
 
 using System;
 using System.Collections.Generic;
@@ -46,8 +46,8 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
 
             string sessionIdValue = locatorParameters[SessionIdParameterName];
             this.SessionId = new SessionId(sessionIdValue);
-            currentSession = SessionManager.Instance.GetSession(this.SessionId);
-            if (currentSession == null)
+            this.currentSession = SessionManager.Instance.GetSession(this.SessionId);
+            if (this.currentSession == null)
             {
                 throw new ResourceNotFoundException("Could not find active session with id '" + SessionId.ToString() + "'");
             }
@@ -58,7 +58,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// </summary>
         protected DriverSession Session
         {
-            get { return currentSession; }
+            get { return this.currentSession; }
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// and a value of the ID of the <see cref="IWebElement"/> to return.</returns>
         protected Dictionary<string, object> WrapElement(IWebElement element)
         {
-            string elementId = Session.KnownElements.Add(element);
+            string elementId = this.Session.KnownElements.Add(element);
             Dictionary<string, object> wrappedElement = new Dictionary<string, object>();
             wrappedElement.Add("ELEMENT", elementId);
             return wrappedElement;

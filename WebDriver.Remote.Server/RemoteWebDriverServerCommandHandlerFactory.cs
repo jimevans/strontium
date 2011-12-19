@@ -1,20 +1,20 @@
-﻿/* Copyright notice and license
-Copyright 2007-2010 WebDriver committers
-Copyright 2007-2010 Google Inc.
-Portions copyright 2007 ThoughtWorks, Inc
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+﻿// <copyright file="RemoteWebDriverServerCommandHandlerFactory.cs" company="WebDriver Committers">
+// Copyright 2007-2011 WebDriver committers
+// Copyright 2007-2011 Google Inc.
+// Portions copyright 2007 ThoughtWorks, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// </copyright>
 
 using System;
 using System.Collections.Generic;
@@ -58,10 +58,8 @@ namespace OpenQA.Selenium.Remote.Server
             MapCommandHandler(DriverCommand.DescribeElement, typeof(DescribeElementHandler));
             MapCommandHandler(DriverCommand.ClearElement, typeof(ClearElementHandler));
             MapCommandHandler(DriverCommand.ClickElement, typeof(ClickElementHandler));
-            MapCommandHandler(DriverCommand.HoverOverElement, typeof(HoverOverElementHandler));
             MapCommandHandler(DriverCommand.SendKeysToElement, typeof(SendKeysToElementHandler));
             MapCommandHandler(DriverCommand.SubmitElement, typeof(SubmitElementHandler));
-            MapCommandHandler(DriverCommand.ToggleElement, typeof(ToggleElementHandler));
             MapCommandHandler(DriverCommand.GetCurrentWindowHandle, typeof(GetCurrentWindowHandler));
             MapCommandHandler(DriverCommand.GetWindowHandles, typeof(GetAllWindowsHandler));
             MapCommandHandler(DriverCommand.SwitchToWindow, typeof(SwitchToWindowHandler));
@@ -71,13 +69,8 @@ namespace OpenQA.Selenium.Remote.Server
             MapCommandHandler(DriverCommand.GetPageSource, typeof(GetPageSourceHandler));
             MapCommandHandler(DriverCommand.GetTitle, typeof(GetTitleHandler));
             MapCommandHandler(DriverCommand.ExecuteScript, typeof(ExecuteScriptHandler));
-            MapCommandHandler(DriverCommand.GetSpeed, typeof(GetSpeedHandler));
-            MapCommandHandler(DriverCommand.SetSpeed, typeof(SetSpeedHandler));
             MapCommandHandler(DriverCommand.GetElementText, typeof(GetElementTextHandler));
-            MapCommandHandler(DriverCommand.GetElementValue, typeof(GetElementValueHandler));
             MapCommandHandler(DriverCommand.GetElementTagName, typeof(GetElementTagNameHandler));
-            MapCommandHandler(DriverCommand.SetElementSelected, typeof(SetElementSelectedHandler));
-            MapCommandHandler(DriverCommand.DragElement, typeof(DragElementHandler));
             MapCommandHandler(DriverCommand.IsElementSelected, typeof(GetElementSelectedHandler));
             MapCommandHandler(DriverCommand.IsElementEnabled, typeof(GetElementEnabledHandler));
             MapCommandHandler(DriverCommand.IsElementDisplayed, typeof(GetElementDisplayedHandler));

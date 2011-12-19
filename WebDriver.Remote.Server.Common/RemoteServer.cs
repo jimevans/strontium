@@ -1,20 +1,20 @@
-﻿/* Copyright notice and license
-Copyright 2007-2010 WebDriver committers
-Copyright 2007-2010 Google Inc.
-Portions copyright 2007 ThoughtWorks, Inc
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+﻿// <copyright file="RemoteServer.cs" company="WebDriver Committers">
+// Copyright 2007-2011 WebDriver committers
+// Copyright 2007-2011 Google Inc.
+// Portions copyright 2007 ThoughtWorks, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// </copyright>
 
 using System;
 using System.Collections.Generic;
@@ -65,6 +65,13 @@ namespace OpenQA.Selenium.Remote.Server
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RemoteServer"/> class using the specifed port and relative path.
+        /// </summary>
+        /// <param name="port">The port to listen on.</param>
+        /// <param name="path">The relative path to connect to.</param>
+        /// <param name="handlerFactory">A <see cref="CommandHandlerFactory"/> used to create <see cref="CommandHandler"/> instances for handling commands.</param>
+        /// <param name="log">A <see cref="Logger"/> used to log information in the server.</param>
         protected RemoteServer(int port, string path, CommandHandlerFactory handlerFactory, Logger log)
             : this("*", port, path, handlerFactory, log)
         {
@@ -73,6 +80,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// <summary>
         /// Initializes a new instance of the <see cref="RemoteServer"/> class using the specifed port, relative path, and logger.
         /// </summary>
+        /// <param name="basePath">The base path of the server to listen on.</param>
         /// <param name="port">The port to listen on.</param>
         /// <param name="path">The relative path to connect to.</param>
         /// <param name="handlerFactory">A <see cref="CommandHandlerFactory"/> used to create <see cref="CommandHandler"/> instances for handling commands.</param>
@@ -418,17 +426,17 @@ namespace OpenQA.Selenium.Remote.Server
                 }
                 catch (NotSupportedException ex)
                 {
-                    resultCode = WebDriverResult.ElementNotEnabled;
+                    resultCode = WebDriverResult.InvalidElementState;
                     resultValue = CreateErrorResponse(commandName, ex);
                 }
                 catch (NotImplementedException ex)
                 {
-                    resultCode = WebDriverResult.ElementNotEnabled;
+                    resultCode = WebDriverResult.InvalidElementState;
                     resultValue = CreateErrorResponse(commandName, ex);
                 }
                 catch (XPathLookupException ex)
                 {
-                    resultCode = WebDriverResult.UnknownScriptResult;
+                    resultCode = WebDriverResult.XPathLookupError;
                     resultValue = CreateErrorResponse(commandName, ex);
                 }
                 catch (Exception ex)

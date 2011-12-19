@@ -1,20 +1,20 @@
-﻿/* Copyright notice and license
-Copyright 2007-2010 WebDriver committers
-Copyright 2007-2010 Google Inc.
-Portions copyright 2007 ThoughtWorks, Inc
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+﻿// <copyright file="NativeMethods.cs" company="WebDriver Committers">
+// Copyright 2007-2011 WebDriver committers
+// Copyright 2007-2011 Google Inc.
+// Portions copyright 2007 ThoughtWorks, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// </copyright>
 
 using System;
 using System.Collections.Generic;
@@ -24,30 +24,85 @@ using System.Text;
 
 namespace StrontiumServer.Internal
 {
+    /// <summary>
+    /// Wraps native OS methods that must be called via P/Invoke
+    /// </summary>
     internal static class NativeMethods
     {
+        /// <summary>
+        /// Represents values for system metrics.
+        /// </summary>
         internal enum SystemMetrics
         {
+            /// <summary>
+            /// Represents a Server R2
+            /// </summary>
             ServerR2 = 89,
+
+            /// <summary>
+            /// Media Center Edition
+            /// </summary>
             MediaCenter = 87,
+
+            /// <summary>
+            /// Starter Edition
+            /// </summary>
             Starter = 88,
+
+            /// <summary>
+            /// Tablet PC Edition
+            /// </summary>
             TabletPC = 86
         }
 
+        /// <summary>
+        /// Represents values for processor architecture.
+        /// </summary>
         internal enum ProcessorArchitecture
         {
-            AMD64 = 9, // x64 (AMD or Intel)
-            IA64 = 6, // Intel Itanium Processor Family (IPF)
-            X86 = 0, // x86
-            Unknown = 0xffff // Unknown architecture.
+            /// <summary>
+            /// x64 (AMD or Intel)
+            /// </summary>
+            AMD64 = 9,
+
+            /// <summary>
+            /// Intel Itanium Processor Family (IPF)
+            /// </summary>
+            IA64 = 6,
+
+            /// <summary>
+            /// Represents a processor of the x86 architecture
+            /// </summary>
+            X86 = 0,
+
+            /// <summary>
+            /// Unknown architecture
+            /// </summary>
+            Unknown = 0xffff
         }
 
+        /// <summary>
+        /// Represents values for the version of NT of this OS.
+        /// </summary>
         internal enum VersionNT
         {
-            DomainController = 0x0000002, // The system is a domain controller and the operating system is Windows Server 2008, Windows Server 2003, or Windows 2000 Server.
-            Server = 0x0000003, // The operating system is Windows Server 2008, Windows Server 2003, or Windows 2000 Server.
-            // Note that a server that is also a domain controller is reported as DomainController, not Server.
-            Workstation = 0x0000001 // The operating system is Windows Vista, Windows XP Professional, Windows XP Home Edition, or Windows 2000 Professional.
+            /// <summary>
+            /// The system is a domain controller and the operating system is Windows Server 2008, Windows Server 2003, or Windows 2000 Server.
+            /// </summary>
+            DomainController = 0x0000002,
+ 
+            /// <summary>
+            /// The operating system is Windows Server 2008, Windows Server 2003, or Windows 2000 Server.
+            /// </summary>
+            /// <remarks>
+            /// Note that a server that is also a domain controller is reported as DomainController, not Server.
+            /// </remarks>
+            Server = 0x0000003,
+
+            /// <summary>
+            /// The operating system is Windows Vista, Windows XP Professional, Windows XP Home Edition, or Windows 2000 Professional.
+            /// </summary>
+            Workstation = 0x0000001
         }
 
         [DllImport("httpapi.dll", SetLastError = true)]
@@ -99,6 +154,9 @@ namespace StrontiumServer.Internal
         [DllImport("user32")]
         internal static extern int GetSystemMetrics(int nIndex);
 
+        /// <summary>
+        /// Represents the structure used by the GetOSVersionInfoEx API
+        /// </summary>
         [StructLayout(LayoutKind.Sequential)]
         internal struct OSVersionInfoEx
         {
@@ -116,6 +174,9 @@ namespace StrontiumServer.Internal
             public byte wReserved;
         }
 
+        /// <summary>
+        /// Represents the structure used by the GetSystemInfo API
+        /// </summary>
         [StructLayout(LayoutKind.Sequential)]
         internal struct SystemInfo
         {

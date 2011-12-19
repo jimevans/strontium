@@ -1,20 +1,20 @@
-﻿/* Copyright notice and license
-Copyright 2007-2010 WebDriver committers
-Copyright 2007-2010 Google Inc.
-Portions copyright 2007 ThoughtWorks, Inc
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+﻿// <copyright file="ExecuteScriptHandler.cs" company="WebDriver Committers">
+// Copyright 2007-2011 WebDriver committers
+// Copyright 2007-2011 Google Inc.
+// Portions copyright 2007 ThoughtWorks, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// </copyright>
 
 using System;
 using System.Collections;
@@ -41,8 +41,8 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public ExecuteScriptHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            script = GetCommandParameter("script").ToString();
-            arguments = GetCommandParameter("args");
+            this.script = GetCommandParameter("script").ToString();
+            this.arguments = GetCommandParameter("args");
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "[execute script: {0}, args: {1}]", script, arguments);
+            return string.Format(CultureInfo.InvariantCulture, "[execute script: {0}, args: {1}]", this.script, this.arguments);
         }
 
         /// <summary>
@@ -67,16 +67,16 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
                 throw new InvalidCommandException("Driver does not support JavaScript");
             }
 
-            object[] argsArray = ParseArguments();
+            object[] argsArray = this.ParseArguments();
 
-            object returnValue = javascriptDriver.ExecuteScript(script, argsArray);
-            returnValue = ParseJavaScriptReturnValue(returnValue);
+            object returnValue = javascriptDriver.ExecuteScript(this.script, argsArray);
+            returnValue = this.ParseJavaScriptReturnValue(returnValue);
             return returnValue;
         }
 
         private object[] ParseArguments()
         {
-            object[] argsArray = arguments as object[];
+            object[] argsArray = this.arguments as object[];
             if (argsArray != null)
             {
                 for (int i = 0; i < argsArray.Length; i++)
@@ -109,7 +109,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
                 List<object> listToReturn = new List<object>();
                 for (int i = 0; i < returnValueAsArray.Count; i++)
                 {
-                    listToReturn.Add(ParseJavaScriptReturnValue(returnValueAsArray[i]));
+                    listToReturn.Add(this.ParseJavaScriptReturnValue(returnValueAsArray[i]));
                 }
 
                 parsedObject = listToReturn.ToArray();

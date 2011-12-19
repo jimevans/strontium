@@ -44,13 +44,9 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="WebDriver, Version=2.15.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\WebDriver.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="WebDriver.Remote.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\WebDriver.Remote.Common.dll</HintPath>
+      <HintPath>..\Dependencies\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -71,13 +67,8 @@
     <Compile Include="CommandHandlers\GetElementDisplayedHandler.cs" />
     <Compile Include="CommandHandlers\GetElementEnabledHandler.cs" />
     <Compile Include="CommandHandlers\GetElementSelectedHandler.cs" />
-    <Compile Include="CommandHandlers\DragElementHandler.cs" />
-    <Compile Include="CommandHandlers\SetElementSelectedHandler.cs" />
     <Compile Include="CommandHandlers\GetElementTagNameHandler.cs" />
-    <Compile Include="CommandHandlers\GetElementValueHandler.cs" />
     <Compile Include="CommandHandlers\GetElementTextHandler.cs" />
-    <Compile Include="CommandHandlers\SetSpeedHandler.cs" />
-    <Compile Include="CommandHandlers\GetSpeedHandler.cs" />
     <Compile Include="CommandHandlers\ExecuteScriptHandler.cs" />
     <Compile Include="CommandHandlers\GetPageSourceHandler.cs" />
     <Compile Include="CommandHandlers\GetCurrentUrlHandler.cs" />
@@ -86,10 +77,8 @@
     <Compile Include="CommandHandlers\SwitchToWindowHandler.cs" />
     <Compile Include="CommandHandlers\GetAllWindowsHandler.cs" />
     <Compile Include="CommandHandlers\GetCurrentWindowHandler.cs" />
-    <Compile Include="CommandHandlers\ToggleElementHandler.cs" />
     <Compile Include="CommandHandlers\SubmitElementHandler.cs" />
     <Compile Include="CommandHandlers\SendKeysToElementHandler.cs" />
-    <Compile Include="CommandHandlers\HoverOverElementHandler.cs" />
     <Compile Include="CommandHandlers\FindChildElementsHandler.cs" />
     <Compile Include="CommandHandlers\FindElementsHandler.cs" />
     <Compile Include="CommandHandlers\DeleteCookieNamedHandler.cs" />
@@ -116,32 +105,6 @@
     <Compile Include="DriverSession.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="CommandHandlers\WebElementCommandHandler.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DriverLibraries\Ionic.Zip.Reduced.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DriverLibraries\Newtonsoft.Json.Net20.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DriverLibraries\WebDriver.Chrome.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DriverLibraries\WebDriver.Common.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DriverLibraries\WebDriver.Firefox.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DriverLibraries\WebDriver.IE.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DriverLibraries\WebDriver.Remote.Common.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DriverLibraries\WebDriver.Remote.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebDriver.Remote.Server.Common\WebDriver.Remote.Server.Common.csproj">

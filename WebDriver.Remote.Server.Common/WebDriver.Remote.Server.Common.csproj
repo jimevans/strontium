@@ -41,13 +41,9 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="WebDriver, Version=2.15.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\WebDriver.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="WebDriver.Remote.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\WebDriver.Remote.Common.dll</HintPath>
+      <HintPath>..\Dependencies\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

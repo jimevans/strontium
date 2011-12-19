@@ -1,20 +1,20 @@
-﻿/* Copyright notice and license
-Copyright 2007-2010 WebDriver committers
-Copyright 2007-2010 Google Inc.
-Portions copyright 2007 ThoughtWorks, Inc
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+﻿// <copyright file="Options.cs" company="WebDriver Committers">
+// Copyright 2007-2011 WebDriver committers
+// Copyright 2007-2011 Google Inc.
+// Portions copyright 2007 ThoughtWorks, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// </copyright>
 
 using System;
 using System.Collections.Generic;
@@ -22,12 +22,15 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Security.Principal;
+using System.Text;
 using StrontiumServer.Internal;
 
 namespace StrontiumServer
 {
+    /// <summary>
+    /// Represents the options available from the command line.
+    /// </summary>
     internal class Options
     {
         private const string PortCommandLineOption = "PORT";
@@ -44,59 +47,87 @@ namespace StrontiumServer
         private bool reserveUrl;
         private bool currentUserIsAdmin;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Options"/> class.
+        /// </summary>
+        /// <param name="commandLineArguments">The array of arguments passed in on the command line.</param>
         internal Options(string[] commandLineArguments)
         {
-            GetServerVersion();
-            GetOSVersion();
-            GetCurrentUserAdminStatus();
+            this.GetServerVersion();
+            this.GetOSVersion();
+            this.GetCurrentUserAdminStatus();
             foreach (string arg in commandLineArguments)
             {
                 string[] argumentValues = arg.Split(new string[] { ":" }, 2, StringSplitOptions.None);
                 if (argumentValues.Length > 1)
                 {
-                    SetOption(argumentValues[0], argumentValues[1]);
+                    this.SetOption(argumentValues[0], argumentValues[1]);
                 }
             }
         }
 
+        /// <summary>
+        /// Gets the version of the operating system.
+        /// </summary>
         internal string OSVersion
         {
-            get { return operatingSystemVersion; }
+            get { return this.operatingSystemVersion; }
         }
 
+        /// <summary>
+        /// Gets the version of the server.
+        /// </summary>
         internal string ServerVersion
         {
-            get { return serverVersion; }
+            get { return this.serverVersion; }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether to reserve a URL for use with the HTTP API.
+        /// </summary>
         internal bool ReserveUrl
         {
-            get { return reserveUrl; }
+            get { return this.reserveUrl; }
         }
 
+        /// <summary>
+        /// Gets a the URL to reserve for use with the HTTP API.
+        /// </summary>
         internal string UrlToReserve
         {
-            get { return urlToReserve; }
+            get { return this.urlToReserve; }
         }
 
+        /// <summary>
+        /// Gets the port on which the server should listen.
+        /// </summary>
         internal int Port
         {
-            get { return port; }
+            get { return this.port; }
         }
 
+        /// <summary>
+        /// Gets the user name with which the server should authenticate.
+        /// </summary>
         internal string UserName
         {
-            get { return userName; }
+            get { return this.userName; }
         }
 
+        /// <summary>
+        /// Gets the password with which the server should authenticate.
+        /// </summary>
         internal string Password
         {
-            get { return password; }
+            get { return this.password; }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the current user is an administrator.
+        /// </summary>
         internal bool CurrentUserIsAdmin
         {
-            get { return currentUserIsAdmin; }
+            get { return this.currentUserIsAdmin; }
         }
 
         private void SetOption(string name, string value)
@@ -105,27 +136,26 @@ namespace StrontiumServer
             switch (argumentName)
             {
                 case PortCommandLineOption:
-                    port = int.Parse(value, CultureInfo.InvariantCulture);
+                    this.port = int.Parse(value, CultureInfo.InvariantCulture);
                     break;
 
                 case UserNameCommandLineOption:
-                    userName = value;
+                    this.userName = value;
                     break;
 
                 case PasswordCommandLineOption:
-                    password = value;
+                    this.password = value;
                     break;
 
                 case ReserveUrlCommandLineOption:
-                    reserveUrl = true;
-                    urlToReserve = value;
+                    this.reserveUrl = true;
+                    this.urlToReserve = value;
                     break;
             }
         }
 
         private void GetOSVersion()
         {
-            operatingSystemVersion = Environment.OSVersion.VersionString;
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
                 NativeMethods.OSVersionInfoEx versionInfo = new NativeMethods.OSVersionInfoEx();
@@ -140,27 +170,27 @@ namespace StrontiumServer
                 {
                     if (versionInfo.dwMinorVersion == 1)
                     {
-                        operatingSystemVersion = "Windows XP";
+                        this.operatingSystemVersion = "Windows XP";
                     }
                     else if (versionInfo.dwMinorVersion == 2)
                     {
                         int isServerR2 = NativeMethods.GetSystemMetrics((int)NativeMethods.SystemMetrics.ServerR2);
                         if (versionType == NativeMethods.VersionNT.Workstation && architecture == NativeMethods.ProcessorArchitecture.AMD64)
                         {
-                            operatingSystemVersion = "Windows XP x64 Edition";
+                            this.operatingSystemVersion = "Windows XP x64 Edition";
                         }
                         else if (versionType != NativeMethods.VersionNT.Workstation && isServerR2 == 0)
                         {
-                            operatingSystemVersion = "Windows Server 2003";
+                            this.operatingSystemVersion = "Windows Server 2003";
                         }
                         else if (versionType == NativeMethods.VersionNT.Workstation && isServerR2 != 0)
                         {
-                            operatingSystemVersion = "Windows Server 2003 R2";
+                            this.operatingSystemVersion = "Windows Server 2003 R2";
                         }
                     }
                     else
                     {
-                        operatingSystemVersion = "Windows 2000";
+                        this.operatingSystemVersion = "Windows 2000";
                     }
                 }
                 else if (versionInfo.dwMajorVersion == 6)
@@ -169,37 +199,37 @@ namespace StrontiumServer
                     {
                         if (versionType == NativeMethods.VersionNT.Workstation)
                         {
-                            operatingSystemVersion = "Windows Vista";
+                            this.operatingSystemVersion = "Windows Vista";
                         }
                         else
                         {
-                            operatingSystemVersion = "Windows Server 2008";
+                            this.operatingSystemVersion = "Windows Server 2008";
                         }
                     }
                     else
                     {
                         if (versionType == NativeMethods.VersionNT.Workstation)
                         {
-                            operatingSystemVersion = "Windows 7";
+                            this.operatingSystemVersion = "Windows 7";
                         }
                         else
                         {
-                            operatingSystemVersion = "Windows Server 2008 R2";
+                            this.operatingSystemVersion = "Windows Server 2008 R2";
                         }
                     }
                 }
                 else
                 {
-                    operatingSystemVersion = "Unsupported Windows NT version";
+                    this.operatingSystemVersion = "Unsupported Windows NT version";
                 }
 
                 if (versionInfo.szCSDVersion.Length > 0)
                 {
-                    operatingSystemVersion = operatingSystemVersion + " " + versionInfo.szCSDVersion;
+                    this.operatingSystemVersion = this.operatingSystemVersion + " " + versionInfo.szCSDVersion;
                 }
 
-                operatingSystemVersion += " " + string.Format(CultureInfo.InvariantCulture, "({0}.{1}.{2})", versionInfo.dwMajorVersion, versionInfo.dwMinorVersion, versionInfo.dwBuildNumber);
-                operatingSystemVersion += " " + architecture.ToString().ToLowerInvariant();
+                this.operatingSystemVersion += " " + string.Format(CultureInfo.InvariantCulture, "({0}.{1}.{2})", versionInfo.dwMajorVersion, versionInfo.dwMinorVersion, versionInfo.dwBuildNumber);
+                this.operatingSystemVersion += " " + architecture.ToString().ToLowerInvariant();
             }
         }
 
@@ -209,7 +239,7 @@ namespace StrontiumServer
             if (attributes.Length > 0)
             {
                 AssemblyDescriptionAttribute description = attributes[0] as AssemblyDescriptionAttribute;
-                serverVersion = description.Description;
+                this.serverVersion = description.Description;
             }
         }
 
@@ -219,11 +249,11 @@ namespace StrontiumServer
             {
                 WindowsIdentity identity = WindowsIdentity.GetCurrent();
                 WindowsPrincipal principal = new WindowsPrincipal(identity);
-                currentUserIsAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+                this.currentUserIsAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
             else
             {
-                currentUserIsAdmin = true;
+                this.currentUserIsAdmin = true;
             }
         }
     }

@@ -1,20 +1,20 @@
-﻿/* Copyright notice and license
-Copyright 2007-2010 WebDriver committers
-Copyright 2007-2010 Google Inc.
-Portions copyright 2007 ThoughtWorks, Inc
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+﻿// <copyright file="SessionManager.cs" company="WebDriver Committers">
+// Copyright 2007-2011 WebDriver committers
+// Copyright 2007-2011 Google Inc.
+// Portions copyright 2007 ThoughtWorks, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// </copyright>
 
 using System;
 using System.Collections.Generic;
@@ -42,7 +42,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// </summary>
         private SessionManager()
         {
-            sessionDictionary = new Dictionary<SessionId, DriverSession>();
+            this.sessionDictionary = new Dictionary<SessionId, DriverSession>();
         }
 
         /// <summary>
@@ -82,20 +82,20 @@ namespace OpenQA.Selenium.Remote.Server
                 Type interfaceType = driverType.GetInterface("OpenQA.Selenium.IWebDriver", true);
                 if (interfaceType == null)
                 {
-                   OnDriverRegistrationFailed(new DriverRegistrationFailedEventArgs(className, "Class does not implement IWebDriver"));
+                    this.OnDriverRegistrationFailed(new DriverRegistrationFailedEventArgs(className, "Class does not implement IWebDriver"));
                 }
                 else
                 {
-                    factory.RegisterDriver(capabilities, driverType);
+                    this.factory.RegisterDriver(capabilities, driverType);
                 }
             }
             catch (TypeLoadException typeLoadEx)
             {
-                OnDriverRegistrationFailed(new DriverRegistrationFailedEventArgs(className, typeLoadEx.Message));
+                this.OnDriverRegistrationFailed(new DriverRegistrationFailedEventArgs(className, typeLoadEx.Message));
             }
             catch (FileNotFoundException fileNotFoundEx)
             {
-                OnDriverRegistrationFailed(new DriverRegistrationFailedEventArgs(className, fileNotFoundEx.Message));
+                this.OnDriverRegistrationFailed(new DriverRegistrationFailedEventArgs(className, fileNotFoundEx.Message));
             }
         }
 
@@ -107,9 +107,9 @@ namespace OpenQA.Selenium.Remote.Server
         internal DriverSession GetSession(SessionId sessionId)
         {
             DriverSession existingSession = null;
-            if (SessionExists(sessionId))
+            if (this.SessionExists(sessionId))
             {
-                existingSession = sessionDictionary[sessionId];
+                existingSession = this.sessionDictionary[sessionId];
             }
 
             return existingSession;
@@ -122,10 +122,10 @@ namespace OpenQA.Selenium.Remote.Server
         /// <returns>The <see cref="SessionId"/> of the created session.</returns>
         internal SessionId CreateSession(ICapabilities desiredCapabilities)
         {
-            DriverSession newSession = new DriverSession(factory, desiredCapabilities);
+            DriverSession newSession = new DriverSession(this.factory, desiredCapabilities);
 
             SessionId newSessionId = new SessionId(Guid.NewGuid().ToString());
-            sessionDictionary.Add(newSessionId, newSession);
+            this.sessionDictionary.Add(newSessionId, newSession);
             return newSessionId;
         }
 
@@ -135,9 +135,9 @@ namespace OpenQA.Selenium.Remote.Server
         /// <param name="sessionId">The <see cref="SessionId"/> identifying the session to remove.</param>
         internal void RemoveSession(SessionId sessionId)
         {
-            if (SessionExists(sessionId))
+            if (this.SessionExists(sessionId))
             {
-                sessionDictionary.Remove(sessionId);
+                this.sessionDictionary.Remove(sessionId);
             }
         }
 
@@ -148,15 +148,10 @@ namespace OpenQA.Selenium.Remote.Server
         /// the reason the driver registration failed.</param>
         protected void OnDriverRegistrationFailed(DriverRegistrationFailedEventArgs e)
         {
-            if (DriverRegistrationFailed != null)
+            if (this.DriverRegistrationFailed != null)
             {
-                DriverRegistrationFailed(this, e);
+                this.DriverRegistrationFailed(this, e);
             }
-        }
-
-        private bool SessionExists(SessionId sessionId)
-        {
-            return sessionId != null && sessionDictionary.ContainsKey(sessionId);
         }
 
         private static Type LoadDriverType(string typeDescriptor)
@@ -187,6 +182,11 @@ namespace OpenQA.Selenium.Remote.Server
 
             Type driverType = driverAssembly.GetType(typeFriendlyName, true, true);
             return driverType;
+        }
+
+        private bool SessionExists(SessionId sessionId)
+        {
+            return sessionId != null && this.sessionDictionary.ContainsKey(sessionId);
         }
     }
 }

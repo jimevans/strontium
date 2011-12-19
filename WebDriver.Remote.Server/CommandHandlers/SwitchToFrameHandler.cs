@@ -1,20 +1,20 @@
-﻿/* Copyright notice and license
-Copyright 2007-2010 WebDriver committers
-Copyright 2007-2010 Google Inc.
-Portions copyright 2007 ThoughtWorks, Inc
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+﻿// <copyright file="SwitchToFrameHandler.cs" company="WebDriver Committers">
+// Copyright 2007-2011 WebDriver committers
+// Copyright 2007-2011 Google Inc.
+// Portions copyright 2007 ThoughtWorks, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// </copyright>
 
 using System;
 using System.Collections.Generic;
@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public SwitchToFrameHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            frameId = GetCommandParameter("id");
+            this.frameId = GetCommandParameter("id");
         }
 
         /// <summary>
@@ -49,9 +49,9 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public override string ToString()
         {
             string frameIdDescription = "default content";
-            if (frameId != null)
+            if (this.frameId != null)
             {
-                frameIdDescription = frameId.ToString();
+                frameIdDescription = this.frameId.ToString();
             }
 
             return string.Format(CultureInfo.InvariantCulture, "[switch to frame: {0}]", frameIdDescription);
@@ -63,13 +63,13 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>This command always returns <see langword="null"/>.</returns>
         public override object Execute()
         {
-            if (frameId == null)
+            if (this.frameId == null)
             {
                 Session.Driver.SwitchTo().DefaultContent();
             }
             else
             {
-                string frameName = frameId.ToString();
+                string frameName = this.frameId.ToString();
                 int frameNumber = 0;
                 bool isInt = int.TryParse(frameName, out frameNumber);
                 if (isInt)

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriver.Remote.Server", "WebDriver.Remote.Server\WebDriver.Remote.Server.csproj", "{D5E01A6E-FA03-45EA-BEC5-12FEC4859403}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrontiumServer", "StrontiumServer\StrontiumServer.csproj", "{EB77DBA1-8884-41D5-B398-CABBDF72ED33}"

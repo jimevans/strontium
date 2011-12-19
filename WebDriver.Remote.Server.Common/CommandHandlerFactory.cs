@@ -93,6 +93,11 @@ namespace OpenQA.Selenium.Remote.Server
         /// <exception cref="ArgumentException">If <paramref name="handlerType"/> is not a subclass of <see cref="CommandHandler"/>.</exception>
         protected void MapCommandHandler(DriverCommand command, Type handlerType)
         {
+            if (handlerType == null)
+            {
+                throw new ArgumentNullException("handlerType", "handlerType must not be null");
+            }
+
             if (!handlerType.IsSubclassOf(typeof(CommandHandler)))
             {
                 throw new ArgumentException("Type passed in for handler is not descended from CommandHandler", "handlerType");

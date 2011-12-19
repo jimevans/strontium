@@ -130,48 +130,52 @@ namespace StrontiumServer
             bool urlReserved = true;
             if (!isAdmin)
             {
-                Process reserverProcess = new Process();
-                ProcessStartInfo reserveInfo = new ProcessStartInfo();
-                string fileName = Assembly.GetExecutingAssembly().Location;
-                reserveInfo.WorkingDirectory = Environment.CurrentDirectory;
-                reserveInfo.FileName = fileName;
-                reserveInfo.Arguments = string.Format(CultureInfo.InvariantCulture, "/reserve:{0}", reservePath);
-                if (Environment.OSVersion.Version.Major >= 6)
+                using (Process reserverProcess = new Process())
                 {
-                    logger.Log("Current user is not an administrator. Requesting elevation.");
-                    reserveInfo.Verb = "runas";
-                    reserveInfo.ErrorDialog = true;
-                    reserveInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                }
-                else
-                {
-                    logger.Log("Current user is not an administrator. Attempting login.");
-                    reserveInfo.UseShellExecute = false;
-                    reserveInfo.CreateNoWindow = true;
-                    reserveInfo.UserName = userName;
-                    SecureString securePassword = new SecureString();
-                    foreach (char passwordChar in password.ToCharArray())
+                    ProcessStartInfo reserveInfo = new ProcessStartInfo();
+                    string fileName = Assembly.GetExecutingAssembly().Location;
+                    reserveInfo.WorkingDirectory = Environment.CurrentDirectory;
+                    reserveInfo.FileName = fileName;
+                    reserveInfo.Arguments = string.Format(CultureInfo.InvariantCulture, "/reserve:{0}", reservePath);
+                    if (Environment.OSVersion.Version.Major >= 6)
                     {
-                        securePassword.AppendChar(passwordChar);
+                        logger.Log("Current user is not an administrator. Requesting elevation.");
+                        reserveInfo.Verb = "runas";
+                        reserveInfo.ErrorDialog = true;
+                        reserveInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    }
+                    else
+                    {
+                        logger.Log("Current user is not an administrator. Attempting login.");
+                        reserveInfo.UseShellExecute = false;
+                        reserveInfo.CreateNoWindow = true;
+                        reserveInfo.UserName = userName;
+                        using (SecureString securePassword = new SecureString())
+                        {
+                            foreach (char passwordChar in password.ToCharArray())
+                            {
+                                securePassword.AppendChar(passwordChar);
+                            }
+
+                            reserveInfo.Password = securePassword;
+                        }
                     }
 
-                    reserveInfo.Password = securePassword;
-                }
-
-                reserverProcess.StartInfo = reserveInfo;
-                try
-                {
-                    reserverProcess.Start();
-                    reserverProcess.WaitForExit();
-                    if (reserverProcess.ExitCode != 0)
+                    reserverProcess.StartInfo = reserveInfo;
+                    try
                     {
+                        reserverProcess.Start();
+                        reserverProcess.WaitForExit();
+                        if (reserverProcess.ExitCode != 0)
+                        {
+                            urlReserved = false;
+                        }
+                    }
+                    catch (Win32Exception ex)
+                    {
+                        logger.Log("Error reserving URL: " + ex.Message, LogLevel.Error);
                         urlReserved = false;
                     }
-                }
-                catch (Win32Exception ex)
-                {
-                    logger.Log("Error reserving URL: " + ex.Message, LogLevel.Error);
-                    urlReserved = false;
                 }
             }
             else

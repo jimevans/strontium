@@ -87,6 +87,11 @@ namespace OpenQA.Selenium.Remote.Server
         /// <param name="log">A <see cref="Logger"/> object describing how to log information about commands executed.</param>
         protected RemoteServer(string basePath, int port, string path, CommandHandlerFactory handlerFactory, Logger log)
         {
+            if (path == null)
+            {
+                throw new ArgumentNullException("path", "path cannot be null");
+            }
+
             this.handlerFactory = handlerFactory;
 
             this.listenerPort = port;

@@ -82,6 +82,16 @@ namespace OpenQA.Selenium.Remote.Server
             MapCommandHandler(DriverCommand.ElementEquals, typeof(ElementEqualsHandler));
             MapCommandHandler(DriverCommand.Screenshot, typeof(ScreenshotHandler));
             MapCommandHandler(DriverCommand.ImplicitlyWait, typeof(ImplicitlyWaitHandler));
+            MapCommandHandler(DriverCommand.AcceptAlert, typeof(AcceptAlertHandler));
+            MapCommandHandler(DriverCommand.DismissAlert, typeof(DismissAlertHandler));
+            MapCommandHandler(DriverCommand.GetAlertText, typeof(GetAlertTextHandler));
+            MapCommandHandler(DriverCommand.SetAlertValue, typeof(SetAlertTextHandler));
+            MapCommandHandler(DriverCommand.GetWindowPosition, typeof(GetWindowPositionHandler));
+            MapCommandHandler(DriverCommand.SetWindowPosition, typeof(SetWindowPositionHandler));
+            MapCommandHandler(DriverCommand.GetWindowSize, typeof(GetWindowSizeHandler));
+            MapCommandHandler(DriverCommand.SetWindowSize, typeof(SetWindowSizeHandler));
+            MapCommandHandler(DriverCommand.GetOrientation, typeof(GetOrientationHandler));
+            MapCommandHandler(DriverCommand.SetOrientation, typeof(SetOrientationHandler));
         }
     }
 }

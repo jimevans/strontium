@@ -86,9 +86,9 @@ namespace OpenQA.Selenium.Remote.Server
 
         private void InitializeSessionManager()
         {
-            this.defaultDrivers.Add(DesiredCapabilities.InternetExplorer(), "OpenQA.Selenium.IE.InternetExplorerDriver, WebDriver.IE");
-            this.defaultDrivers.Add(DesiredCapabilities.Firefox(), "OpenQA.Selenium.Firefox.FirefoxDriver, WebDriver.Firefox");
-            this.defaultDrivers.Add(DesiredCapabilities.Chrome(), "OpenQA.Selenium.Chrome.ChromeDriver, WebDriver.Chrome");
+            this.defaultDrivers.Add(DesiredCapabilities.InternetExplorer(), "OpenQA.Selenium.IE.InternetExplorerDriver, WebDriver");
+            this.defaultDrivers.Add(DesiredCapabilities.Firefox(), "OpenQA.Selenium.Firefox.FirefoxDriver, WebDriver");
+            this.defaultDrivers.Add(DesiredCapabilities.Chrome(), "OpenQA.Selenium.Chrome.ChromeDriver, WebDriver");
             this.RegisterDefaultDrivers();
         }
 

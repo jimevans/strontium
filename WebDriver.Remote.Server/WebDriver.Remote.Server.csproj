@@ -69,6 +69,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlers\AcceptAlertHandler.cs" />
+    <Compile Include="CommandHandlers\SetOrientationHandler.cs" />
+    <Compile Include="CommandHandlers\GetOrientationHandler.cs" />
+    <Compile Include="CommandHandlers\SetWindowPositionHandler.cs" />
+    <Compile Include="CommandHandlers\GetWindowPositionHandler.cs" />
+    <Compile Include="CommandHandlers\SetWindowSizeHandler.cs" />
+    <Compile Include="CommandHandlers\GetWindowSizeHandler.cs" />
+    <Compile Include="CommandHandlers\SetAlertTextHandler.cs" />
+    <Compile Include="CommandHandlers\GetAlertTextHandler.cs" />
+    <Compile Include="CommandHandlers\DismissAlertHandler.cs" />
     <Compile Include="RemoteWebDriverServerCommandHandlerFactory.cs" />
     <Compile Include="CommandHandlers\ImplicitlyWaitHandler.cs" />
     <Compile Include="CommandHandlers\DescribeElementHandler.cs" />

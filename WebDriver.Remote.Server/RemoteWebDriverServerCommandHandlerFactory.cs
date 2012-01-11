@@ -39,8 +39,10 @@ namespace OpenQA.Selenium.Remote.Server
             // dynamically using strings instead of the typeof operator; 
             // however, this is marginally faster.
             MapCommandHandler(DriverCommand.DefineDriverMapping, typeof(DefineDriverMappingHandler));
+            MapCommandHandler(DriverCommand.Status, typeof(StatusHandler));
             MapCommandHandler(DriverCommand.NewSession, typeof(NewSessionHandler));
             MapCommandHandler(DriverCommand.GetSessionCapabilities, typeof(GetSessionCapabilitiesHandler));
+            MapCommandHandler(DriverCommand.GetSessionList, typeof(GetSessionListHandler));
             MapCommandHandler(DriverCommand.Close, typeof(CloseHandler));
             MapCommandHandler(DriverCommand.Quit, typeof(QuitHandler));
             MapCommandHandler(DriverCommand.Get, typeof(ChangeUrlHandler));
@@ -69,6 +71,7 @@ namespace OpenQA.Selenium.Remote.Server
             MapCommandHandler(DriverCommand.GetPageSource, typeof(GetPageSourceHandler));
             MapCommandHandler(DriverCommand.GetTitle, typeof(GetTitleHandler));
             MapCommandHandler(DriverCommand.ExecuteScript, typeof(ExecuteScriptHandler));
+            MapCommandHandler(DriverCommand.ExecuteAsyncScript, typeof(ExecuteAsyncScriptHandler));
             MapCommandHandler(DriverCommand.GetElementText, typeof(GetElementTextHandler));
             MapCommandHandler(DriverCommand.GetElementTagName, typeof(GetElementTagNameHandler));
             MapCommandHandler(DriverCommand.IsElementSelected, typeof(GetElementSelectedHandler));
@@ -82,6 +85,7 @@ namespace OpenQA.Selenium.Remote.Server
             MapCommandHandler(DriverCommand.ElementEquals, typeof(ElementEqualsHandler));
             MapCommandHandler(DriverCommand.Screenshot, typeof(ScreenshotHandler));
             MapCommandHandler(DriverCommand.ImplicitlyWait, typeof(ImplicitlyWaitHandler));
+            MapCommandHandler(DriverCommand.SetAsyncScriptTimeout, typeof(SetAsyncScriptTimeoutHandler));
             MapCommandHandler(DriverCommand.AcceptAlert, typeof(AcceptAlertHandler));
             MapCommandHandler(DriverCommand.DismissAlert, typeof(DismissAlertHandler));
             MapCommandHandler(DriverCommand.GetAlertText, typeof(GetAlertTextHandler));
@@ -92,6 +96,12 @@ namespace OpenQA.Selenium.Remote.Server
             MapCommandHandler(DriverCommand.SetWindowSize, typeof(SetWindowSizeHandler));
             MapCommandHandler(DriverCommand.GetOrientation, typeof(GetOrientationHandler));
             MapCommandHandler(DriverCommand.SetOrientation, typeof(SetOrientationHandler));
+            MapCommandHandler(DriverCommand.MouseClick, typeof(MouseClickHandler));
+            MapCommandHandler(DriverCommand.MouseDoubleClick, typeof(MouseDoubleClickHandler));
+            MapCommandHandler(DriverCommand.MouseDown, typeof(MouseDownHandler));
+            MapCommandHandler(DriverCommand.MouseUp, typeof(MouseUpHandler));
+            MapCommandHandler(DriverCommand.MouseMoveTo, typeof(MouseMoveToHandler));
+            MapCommandHandler(DriverCommand.SendKeysToActiveElement, typeof(SendKeysToActiveElementHandler));
         }
     }
 }

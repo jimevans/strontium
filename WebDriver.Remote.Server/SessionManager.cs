@@ -69,6 +69,20 @@ namespace OpenQA.Selenium.Remote.Server
             }
         }
 
+        internal IList<string> SessionList
+        {
+            get
+            {
+                List<string> sessions = new List<string>();
+                foreach (SessionId id in this.sessionDictionary.Keys)
+                {
+                    sessions.Add(id.ToString());
+                }
+
+                return sessions;
+            }
+        }
+
         /// <summary>
         /// Registers a driver for use with the <see cref="SessionManager"/>.
         /// </summary>

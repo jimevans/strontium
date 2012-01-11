@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Globalization;
 
 namespace OpenQA.Selenium.Remote.Server.CommandHandlers
 {
@@ -30,6 +31,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
     internal abstract class WebDriverCommandHandler : CommandHandler
     {
         private DriverSession currentSession;
+        private string description = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WebDriverCommandHandler"/> class.
@@ -54,11 +56,29 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         }
 
         /// <summary>
+        /// Gets or sets the description for the log.
+        /// </summary>
+        protected string Description
+        {
+            get { return this.description; }
+            set { this.description = value; }
+        }
+
+        /// <summary>
         /// Gets the <see cref="DriverSession"/> used to execute this command.
         /// </summary>
         protected DriverSession Session
         {
             get { return this.currentSession; }
+        }
+
+        /// <summary>
+        /// Returns a string representing the description of this <see cref="CommandHandler"/>.
+        /// </summary>
+        /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>
+        public override string ToString()
+        {
+            return this.description;
         }
 
         /// <summary>

@@ -129,12 +129,23 @@ namespace OpenQA.Selenium.Remote.Server
         /// <exception cref="InvalidParameterException">Thrown if the parameter is not found in the dictionary of parameters.</exception>
         protected object GetCommandParameter(string parameterName)
         {
-            if (!this.commandParameters.ContainsKey(parameterName))
+            if (!this.HasCommandParameter(parameterName))
             {
                 throw new InvalidParameterException("Parameter '" + parameterName + "' not found");
             }
 
             return this.commandParameters[parameterName];
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this command has a parameter in the set of parameters sent in the body of the
+        /// request.
+        /// </summary>
+        /// <param name="parameterName">The name of the parameter to query the existence of.</param>
+        /// <returns><see langword="true"/> if the command contains the parameter; otherwise, <see langword="false"/>.</returns>
+        protected bool HasCommandParameter(string parameterName)
+        {
+            return this.commandParameters.ContainsKey(parameterName);
         }
         #endregion
     }

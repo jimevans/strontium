@@ -70,6 +70,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandlers\AcceptAlertHandler.cs" />
+    <Compile Include="CommandHandlers\SendKeysToActiveElementHandler.cs" />
+    <Compile Include="CommandHandlers\MouseMoveToHandler.cs" />
+    <Compile Include="CommandHandlers\MouseUpHandler.cs" />
+    <Compile Include="CommandHandlers\MouseDownHandler.cs" />
+    <Compile Include="CommandHandlers\MouseDoubleClickHandler.cs" />
+    <Compile Include="CommandHandlers\MouseClickHandler.cs" />
+    <Compile Include="CommandHandlers\SetAsyncScriptTimeoutHandler.cs" />
+    <Compile Include="CommandHandlers\ExecuteAsyncScriptHandler.cs" />
+    <Compile Include="CommandHandlers\GetSessionListHandler.cs" />
+    <Compile Include="CommandHandlers\StatusHandler.cs" />
     <Compile Include="CommandHandlers\SetOrientationHandler.cs" />
     <Compile Include="CommandHandlers\GetOrientationHandler.cs" />
     <Compile Include="CommandHandlers\SetWindowPositionHandler.cs" />

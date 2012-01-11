@@ -43,6 +43,14 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         }
 
         /// <summary>
+        /// Gets the keystroke sequence to send.
+        /// </summary>
+        protected string KeysToSend
+        {
+            get { return this.keysToSend; }
+        }
+
+        /// <summary>
         /// Returns a string representing the description of this <see cref="CommandHandler"/>.
         /// </summary>
         /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>

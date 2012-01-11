@@ -43,6 +43,15 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         {
             this.script = GetCommandParameter("script").ToString();
             this.arguments = GetCommandParameter("args");
+            this.Description = "[execute script: {0}, args: {1}]";
+        }
+
+        /// <summary>
+        /// Gets the script to be executed.
+        /// </summary>
+        protected string Script
+        {
+            get { return this.script; }
         }
 
         /// <summary>
@@ -51,7 +60,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "[execute script: {0}, args: {1}]", this.script, this.arguments);
+            return string.Format(CultureInfo.InvariantCulture, this.Description, this.script, this.arguments);
         }
 
         /// <summary>
@@ -69,12 +78,12 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
 
             object[] argsArray = this.ParseArguments();
 
-            object returnValue = javascriptDriver.ExecuteScript(this.script, argsArray);
+            object returnValue = javascriptDriver.ExecuteScript(this.Script, argsArray);
             returnValue = this.ParseJavaScriptReturnValue(returnValue);
             return returnValue;
         }
 
-        private object[] ParseArguments()
+        protected object[] ParseArguments()
         {
             object[] argsArray = this.arguments as object[];
             if (argsArray != null)
@@ -99,7 +108,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
             return argsArray;
         }
 
-        private object ParseJavaScriptReturnValue(object returnValue)
+        protected object ParseJavaScriptReturnValue(object returnValue)
         {
             object parsedObject = null;
             IList returnValueAsArray = returnValue as IList;

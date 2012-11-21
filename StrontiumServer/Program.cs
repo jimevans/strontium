@@ -42,6 +42,7 @@ namespace StrontiumServer
         private static string userName = string.Empty;
         private static string password = string.Empty;
         private static bool continueRunning = true;
+        private static bool ignoreRemoteShutdown;
 
         /// <summary>
         /// The main entry point into the application.
@@ -63,7 +64,9 @@ namespace StrontiumServer
                 LogVersionDetails(commandLineOptions);
                 userName = commandLineOptions.UserName;
                 password = commandLineOptions.Password;
+                ignoreRemoteShutdown = commandLineOptions.IgnoreRemoteShutdown;
                 httpServer = new RemoteWebDriverServer(commandLineOptions.Port, "wd/hub/", logger);
+                httpServer.ShutdownRequested += new EventHandler(OnRemoteServerShutdownRequested);
                 bool urlReservationExists = CheckForUrlReservation(commandLineOptions);
                 if (urlReservationExists)
                 {
@@ -78,12 +81,28 @@ namespace StrontiumServer
             }
         }
 
+        private static void OnRemoteServerShutdownRequested(object sender, EventArgs e)
+        {
+            logger.Log("Remote server shutdown requested...", LogLevel.Info);
+            if (ignoreRemoteShutdown)
+            {
+                logger.Log("Remote server shutdown request ignored", LogLevel.Info);
+            }
+
+            ShutdownServer();
+        }
+
         private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
             logger.Log("Shutting down server...", LogLevel.Info);
+            ShutdownServer();
+            e.Cancel = true;
+        }
+
+        private static void ShutdownServer()
+        {
             httpServer.Dispose();
             continueRunning = false;
-            e.Cancel = true;
         }
 
         private static void LogVersionDetails(Options commandLineOptions)

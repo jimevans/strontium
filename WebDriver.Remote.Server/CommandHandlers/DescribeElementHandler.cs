@@ -45,7 +45,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "[describe: {0}]", ElementId);
+            return string.Format(CultureInfo.InvariantCulture, "[describe: {0}]", this.ElementId);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>The behavior of this command is undefined, though it is reserved by the JSON wire protocol specification.</returns>
         public override object Execute()
         {
-            return ElementId;
+            return this.ElementId;
         }
     }
 }

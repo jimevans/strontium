@@ -45,7 +45,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "[submit element: {0}]", ElementId);
+            return string.Format(CultureInfo.InvariantCulture, "[submit element: {0}]", this.ElementId);
         }
 
         /// <summary>

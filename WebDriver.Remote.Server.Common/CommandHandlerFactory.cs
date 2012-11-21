@@ -32,7 +32,7 @@ namespace OpenQA.Selenium.Remote.Server
     {
         #region Private members
         private static object lockObject = new object();
-        private Dictionary<DriverCommand, ConstructorInfo> handlers = new Dictionary<DriverCommand, ConstructorInfo>();
+        private Dictionary<string, ConstructorInfo> handlers = new Dictionary<string, ConstructorInfo>();
         private ConstructorInfo commandNotImplementedHandlerConstructor; 
         #endregion
 
@@ -55,7 +55,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// <param name="locatorParameters">The parameters in the URL used to locate the resource.</param>
         /// <param name="parameters">The parameters in the body of the request used to act on the resource.</param>
         /// <returns>A <see cref="CommandHandler"/> capable of executing the desired command.</returns>
-        public CommandHandler CreateHandler(DriverCommand commandName, Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
+        public CommandHandler CreateHandler(string commandName, Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
         {
             CommandHandler handler = null;
             lock (lockObject)
@@ -74,7 +74,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// </summary>
         /// <param name="commandName">The <see cref="DriverCommand"/> value to create a handler for.</param>
         /// <returns><see langword="true"/> if the factory can create a handler for the command; otherwise <see langword="false"/>.</returns>
-        public bool CanCreateHandler(DriverCommand commandName)
+        public bool CanCreateHandler(string commandName)
         {
             return this.handlers.ContainsKey(commandName);
         }
@@ -91,7 +91,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// <param name="command">The <see cref="DriverCommand"/> value to map the handler for.</param>
         /// <param name="handlerType">The <see cref="Type"/> used to handle the command.</param>
         /// <exception cref="ArgumentException">If <paramref name="handlerType"/> is not a subclass of <see cref="CommandHandler"/>.</exception>
-        protected void MapCommandHandler(DriverCommand command, Type handlerType)
+        protected void MapCommandHandler(string command, Type handlerType)
         {
             if (handlerType == null)
             {
@@ -115,7 +115,7 @@ namespace OpenQA.Selenium.Remote.Server
             return constructor;
         }
 
-        private ConstructorInfo GetHandlerConstructor(DriverCommand commandName)
+        private ConstructorInfo GetHandlerConstructor(string commandName)
         {
             ConstructorInfo handlerConstructor = null;
             if (!this.CanCreateHandler(commandName))

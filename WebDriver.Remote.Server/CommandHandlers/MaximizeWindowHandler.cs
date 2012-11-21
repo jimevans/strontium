@@ -1,4 +1,4 @@
-﻿// <copyright file="GetElementDisplayedHandler.cs" company="WebDriver Committers">
+﻿// <copyright file="MaximizeWindowHandler.cs" company="WebDriver Committers">
 // Copyright 2007-2011 WebDriver committers
 // Copyright 2007-2011 Google Inc.
 // Portions copyright 2007 ThoughtWorks, Inc
@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -25,16 +26,18 @@ using System.Text;
 namespace OpenQA.Selenium.Remote.Server.CommandHandlers
 {
     /// <summary>
-    /// Provides the handler for the <see cref="DriverCommand.IsElementDisplayed"/> command.
+    /// Provides the handler for the <see cref="DriverCommand.SetWindowSize"/> command.
     /// </summary>
-    internal class GetElementDisplayedHandler : WebElementCommandHandler
+    internal class MaximizeWindowHandler : WebDriverCommandHandler
     {
+        private Size newWindowSize;
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetElementDisplayedHandler"/> class.
+        /// Initializes a new instance of the <see cref="MaximizeWindowHandler"/> class.
         /// </summary>
         /// <param name="locatorParameters">A <see cref="Dictionary{K, V}"/> containing the parameters used to match a resource in the URL.</param>
         /// <param name="parameters">A <see cref="Dictionary{K, V}"/> containing the parameters used to operate on the resource.</param>
-        public GetElementDisplayedHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
+        public MaximizeWindowHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
         }
@@ -45,18 +48,17 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "[get element displayed: {0}]", this.ElementId);
+            return string.Format(CultureInfo.InvariantCulture, "[set window size: {0}, {1}]", this.newWindowSize.Width, this.newWindowSize.Height);
         }
 
         /// <summary>
-        /// Gets whether the element referenced by this <see cref="CommandHandler"/> is displayed.
+        /// Sets the size of the window of the current driver.
         /// </summary>
-        /// <returns><see langword="true"/> if the element is displayed, otherwise <see langword="false"/></returns>
+        /// <returns>This command always returns <see langword="null"/>.</returns>
         public override object Execute()
         {
-            IWebElement renderedElement = GetElement();
-            bool isElementDisplayed = renderedElement.Displayed;
-            return isElementDisplayed;
+            Session.Driver.Manage().Window.Maximize();
+            return null;
         }
     }
 }

@@ -50,7 +50,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "[find child element of: {0} by: {1}='{2}']", ElementId, this.mechanism, this.findValue);
+            return string.Format(CultureInfo.InvariantCulture, "[find child element of: {0} by: {1}='{2}']", this.ElementId, this.mechanism, this.findValue);
         }
 
         /// <summary>

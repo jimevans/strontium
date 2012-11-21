@@ -40,8 +40,8 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public SetWindowPositionHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            int x = (int)GetCommandParameter("x");
-            int y = (int)GetCommandParameter("y");
+            int x = Convert.ToInt32(GetCommandParameter("x"));
+            int y = Convert.ToInt32(GetCommandParameter("y"));
 
             this.windowPosition = new Point(x, y);
         }
@@ -61,7 +61,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>This command always returns <see langword="null"/>.</returns>
         public override object Execute()
         {
-            Point windowPosition = Session.Driver.Manage().Window.Position = this.windowPosition;
+            Session.Driver.Manage().Window.Position = this.windowPosition;
             return null;
         }
     }

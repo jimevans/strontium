@@ -37,6 +37,7 @@ namespace StrontiumServer
         private const string UserNameCommandLineOption = "USERNAME";
         private const string PasswordCommandLineOption = "PASSWORD";
         private const string ReserveUrlCommandLineOption = "RESERVE";
+        private const string RemoteShutdownCommandLineOption = "REMOTESHUTDOWN";
 
         private int port = 4444;
         private string userName = string.Empty;
@@ -46,6 +47,7 @@ namespace StrontiumServer
         private string serverVersion = string.Empty;
         private bool reserveUrl;
         private bool currentUserIsAdmin;
+        private bool ignoreRemoteShutdown;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Options"/> class.
@@ -130,6 +132,14 @@ namespace StrontiumServer
             get { return this.currentUserIsAdmin; }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the server should ignore remote shutdown requests.
+        /// </summary>
+        internal bool IgnoreRemoteShutdown
+        {
+            get { return this.ignoreRemoteShutdown; }
+        }
+
         private void SetOption(string name, string value)
         {
             string argumentName = name.Substring(1).ToUpperInvariant();
@@ -150,6 +160,10 @@ namespace StrontiumServer
                 case ReserveUrlCommandLineOption:
                     this.reserveUrl = true;
                     this.urlToReserve = value;
+                    break;
+
+                case RemoteShutdownCommandLineOption:
+                    this.ignoreRemoteShutdown = value.ToUpperInvariant() == "IGNORE";
                     break;
             }
         }

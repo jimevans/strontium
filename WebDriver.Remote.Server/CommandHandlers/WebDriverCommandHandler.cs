@@ -18,9 +18,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Globalization;
 
 namespace OpenQA.Selenium.Remote.Server.CommandHandlers
 {
@@ -41,12 +41,12 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         protected WebDriverCommandHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            if (!locatorParameters.ContainsKey(SessionIdParameterName))
+            if (!locatorParameters.ContainsKey(CommandHandler.SessionIdParameterName))
             {
                 throw new InvalidCommandException("Command requires a session ID");
             }
 
-            string sessionIdValue = locatorParameters[SessionIdParameterName];
+            string sessionIdValue = locatorParameters[CommandHandler.SessionIdParameterName];
             this.SessionId = new SessionId(sessionIdValue);
             this.currentSession = SessionManager.Instance.GetSession(this.SessionId);
             if (this.currentSession == null)
@@ -118,6 +118,10 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
 
                 case "class name":
                     finder = By.ClassName(findValue);
+                    break;
+
+                case "css selector":
+                    finder = By.CssSelector(findValue);
                     break;
 
                 default:

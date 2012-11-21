@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         protected WebElementCommandHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            this.elementId = GetLocatorParameter(IdParameterName);
+            this.elementId = this.GetLocatorParameter(CommandHandler.IdParameterName);
         }
 
         /// <summary>

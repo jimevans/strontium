@@ -41,8 +41,8 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public ExecuteScriptHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            this.script = GetCommandParameter("script").ToString();
-            this.arguments = GetCommandParameter("args");
+            this.script = this.GetCommandParameter("script").ToString();
+            this.arguments = this.GetCommandParameter("args");
             this.Description = "[execute script: {0}, args: {1}]";
         }
 
@@ -83,6 +83,10 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
             return returnValue;
         }
 
+        /// <summary>
+        /// Parses arguments to the script.
+        /// </summary>
+        /// <returns>An object array containing the arguments.</returns>
         protected object[] ParseArguments()
         {
             object[] argsArray = this.arguments as object[];
@@ -108,6 +112,11 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
             return argsArray;
         }
 
+        /// <summary>
+        /// Parses the return value from the JavaScript execution.
+        /// </summary>
+        /// <param name="returnValue">The return value returned from the JavaScript execution.</param>
+        /// <returns>The parsed return value.</returns>
         protected object ParseJavaScriptReturnValue(object returnValue)
         {
             object parsedObject = null;

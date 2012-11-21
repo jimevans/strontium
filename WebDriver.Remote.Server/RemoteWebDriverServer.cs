@@ -42,7 +42,7 @@ namespace OpenQA.Selenium.Remote.Server
 
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="RemoteWebDriverServer"/> class using the specifed port and relative path.
+        /// Initializes a new instance of the <see cref="RemoteWebDriverServer"/> class using the specified port and relative path.
         /// </summary>
         /// <param name="port">The port to listen on.</param>
         /// <param name="path">The relative path to connect to.</param>
@@ -52,7 +52,7 @@ namespace OpenQA.Selenium.Remote.Server
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RemoteWebDriverServer"/> class using the specifed port, relative path, and logger.
+        /// Initializes a new instance of the <see cref="RemoteWebDriverServer"/> class using the specified port, relative path, and logger.
         /// </summary>
         /// <param name="port">The port to listen on.</param>
         /// <param name="path">The relative path to connect to.</param>
@@ -63,7 +63,7 @@ namespace OpenQA.Selenium.Remote.Server
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RemoteWebDriverServer"/> class using the specifed port, relative path, and logger.
+        /// Initializes a new instance of the <see cref="RemoteWebDriverServer"/> class using the specified port, relative path, and logger.
         /// </summary>
         /// <param name="port">The port to listen on.</param>
         /// <param name="path">The relative path to connect to.</param>

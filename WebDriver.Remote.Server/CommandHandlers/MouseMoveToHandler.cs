@@ -30,14 +30,14 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
     /// </summary>
     internal class MouseMoveToHandler : WebDriverCommandHandler
     {
-        private static string XOFFSET = "xoffset";
-        private static string YOFFSET = "yoffset";
-        private static string ELEMENT = "element";
-        string elementId;
-        bool elementProvided = false;
-        int xOffset = 0;
-        int yOffset = 0;
-        bool offsetsProvided = false;
+        private const string XOffsetParameterName = "xoffset";
+        private const string YOffsetParameterName = "yoffset";
+        private const string ElementParameterName = "element";
+        private string elementId;
+        private bool elementProvided = false;
+        private int offsetX = 0;
+        private int offsetY = 0;
+        private bool offsetsProvided = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MouseMoveToHandler"/> class.
@@ -47,26 +47,25 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public MouseMoveToHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            this.GetCommandParameter("");
-            if (this.HasCommandParameter(ELEMENT) && this.GetCommandParameter(ELEMENT) != null)
+            if (this.HasCommandParameter(ElementParameterName) && this.GetCommandParameter(ElementParameterName) != null)
             {
-                elementId = this.GetCommandParameter(ELEMENT).ToString();
-                elementProvided = true;
+                this.elementId = this.GetCommandParameter(ElementParameterName).ToString();
+                this.elementProvided = true;
             }
             else
             {
-                elementProvided = false;
+                this.elementProvided = false;
             }
 
-            if (this.HasCommandParameter(XOFFSET) && this.HasCommandParameter(YOFFSET))
+            if (this.HasCommandParameter(XOffsetParameterName) && this.HasCommandParameter(YOffsetParameterName))
             {
-                xOffset = (int)GetCommandParameter(XOFFSET);
-                yOffset = (int)GetCommandParameter(YOFFSET);
-                offsetsProvided = true;
+                this.offsetX = Convert.ToInt32(GetCommandParameter(XOffsetParameterName));
+                this.offsetY = Convert.ToInt32(GetCommandParameter(YOffsetParameterName));
+                this.offsetsProvided = true;
             }
             else
             {
-                offsetsProvided = false;
+                this.offsetsProvided = false;
             }
         }
 
@@ -76,7 +75,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "[move mouse: {0}, {1}]", elementId, offsetsProvided);
+            return string.Format(CultureInfo.InvariantCulture, "[move mouse: {0}, {1}]", this.elementId, this.offsetsProvided);
         }
 
         /// <summary>
@@ -89,16 +88,16 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
             IMouse mouse = hasInputDevicesDriver.Mouse;
  
             ICoordinates elementLocation = null;
-            if (elementProvided)
+            if (this.elementProvided)
             {
-                IWebElement element = this.Session.KnownElements.GetElement(elementId);
+                IWebElement element = this.Session.KnownElements.GetElement(this.elementId);
                 ILocatable locatableElement = element as ILocatable;
                 elementLocation = locatableElement.Coordinates;
             }
 
-            if (offsetsProvided)
+            if (this.offsetsProvided)
             {
-                mouse.MouseMove(elementLocation, xOffset, yOffset);
+                mouse.MouseMove(elementLocation, this.offsetX, this.offsetY);
             }
             else
             {

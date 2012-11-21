@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public GetElementValueOfCssPropertyHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            this.propertyName = GetLocatorParameter(CssPropertyNameParameterName);
+            this.propertyName = this.GetLocatorParameter(CommandHandler.CssPropertyNameParameterName);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "[get element css property value: {0}, {1}]", ElementId, this.propertyName);
+            return string.Format(CultureInfo.InvariantCulture, "[get element css property value: {0}, {1}]", this.ElementId, this.propertyName);
         }
 
         /// <summary>

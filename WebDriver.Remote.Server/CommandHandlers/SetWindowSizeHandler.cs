@@ -40,8 +40,8 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public SetWindowSizeHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            int width = (int)GetCommandParameter("width");
-            int height = (int)GetCommandParameter("height");
+            int width = Convert.ToInt32(GetCommandParameter("width"));
+            int height = Convert.ToInt32(GetCommandParameter("height"));
 
             this.newWindowSize = new Size(width, height);
         }
@@ -61,7 +61,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>This command always returns <see langword="null"/>.</returns>
         public override object Execute()
         {
-            Size windowSize = Session.Driver.Manage().Window.Size = this.newWindowSize;
+            Session.Driver.Manage().Window.Size = this.newWindowSize;
             return null;
         }
     }

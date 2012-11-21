@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public GetElementAttributeHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            this.attributeName = GetLocatorParameter(NameParameterName);
+            this.attributeName = this.GetLocatorParameter(CommandHandler.NameParameterName);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "[get element attribute: {0}, {1}]", ElementId, this.attributeName);
+            return string.Format(CultureInfo.InvariantCulture, "[get element attribute: {0}, {1}]", this.ElementId, this.attributeName);
         }
 
         /// <summary>

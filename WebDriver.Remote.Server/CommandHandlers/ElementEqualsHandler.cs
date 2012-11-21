@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public ElementEqualsHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            this.otherElementId = GetLocatorParameter(OtherParameterName);
+            this.otherElementId = this.GetLocatorParameter(CommandHandler.OtherParameterName);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// <returns>A string representing the description of this <see cref="CommandHandler"/>.</returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "[equals: {0}, {1}]", ElementId, this.otherElementId);
+            return string.Format(CultureInfo.InvariantCulture, "[equals: {0}, {1}]", this.ElementId, this.otherElementId);
         }
 
         /// <summary>

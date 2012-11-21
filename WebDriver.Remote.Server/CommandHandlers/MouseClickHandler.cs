@@ -60,7 +60,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         {
             IHasInputDevices hasInputDevicesDriver = this.Session.Driver as IHasInputDevices;
             IMouse mouse = hasInputDevicesDriver.Mouse;
-            if (leftMouseButton)
+            if (this.leftMouseButton)
             {
                 mouse.Click(null);
             }

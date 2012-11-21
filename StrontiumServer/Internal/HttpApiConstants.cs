@@ -34,7 +34,7 @@ namespace StrontiumServer.Internal
         public const uint InitializeConfig = 0x00000002;
 
         /// <summary>
-        /// Gets the HttpApiVersion for HTTP 1.0
+        /// Gets the HTTP API version for HTTP 1.0
         /// </summary>
         public static HttpApiVersion Version1
         {

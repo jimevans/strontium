@@ -20,8 +20,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Reflection;
+using System.Text;
 
 namespace OpenQA.Selenium.Remote.Server.CommandHandlers
 {
@@ -62,7 +62,6 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
                 AssemblyVersionAttribute version = attributes[0] as AssemblyVersionAttribute;
                 build["version"] = version.Version;
             }
-
 
             Dictionary<string, object> os = new Dictionary<string, object>();
             string platformName = "windows";

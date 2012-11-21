@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public SwitchToFrameHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            this.frameId = GetCommandParameter("id");
+            this.frameId = this.GetCommandParameter("id");
         }
 
         /// <summary>
@@ -69,16 +69,28 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
             }
             else
             {
-                string frameName = this.frameId.ToString();
-                int frameNumber = 0;
-                bool isInt = int.TryParse(frameName, out frameNumber);
-                if (isInt)
+                Dictionary<string, object> element = this.frameId as Dictionary<string, object>;
+                if (element != null)
                 {
-                    Session.Driver.SwitchTo().Frame(frameNumber);
+                    if (element.ContainsKey("ELEMENT"))
+                    {
+                        IWebElement frameElement = Session.KnownElements.GetElement(element["ELEMENT"].ToString());
+                        Session.Driver.SwitchTo().Frame(frameElement);
+                    }
                 }
                 else
                 {
-                    Session.Driver.SwitchTo().Frame(frameName);
+                    string frameName = this.frameId.ToString();
+                    int frameNumber = 0;
+                    bool isInt = int.TryParse(frameName, out frameNumber);
+                    if (isInt)
+                    {
+                        Session.Driver.SwitchTo().Frame(frameNumber);
+                    }
+                    else
+                    {
+                        Session.Driver.SwitchTo().Frame(frameName);
+                    }
                 }
             }
 

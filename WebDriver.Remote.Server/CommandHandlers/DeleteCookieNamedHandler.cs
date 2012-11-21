@@ -40,7 +40,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public DeleteCookieNamedHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            this.name = GetLocatorParameter(NameParameterName);
+            this.name = this.GetLocatorParameter(CommandHandler.NameParameterName);
         }
 
         /// <summary>

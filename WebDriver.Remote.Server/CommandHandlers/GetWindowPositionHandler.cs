@@ -53,7 +53,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// Gets the position of the window for the current driver.
         /// </summary>
         /// <returns>A <see cref="Dictionary{K, V}"/> containing the x and y coordinates of the
-        /// upper-lefthand corner of the window.</returns>
+        /// upper left-hand corner of the window.</returns>
         public override object Execute()
         {
             Point windowPosition = Session.Driver.Manage().Window.Position;

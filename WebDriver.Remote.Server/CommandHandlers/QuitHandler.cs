@@ -54,7 +54,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public override object Execute()
         {
             Session.Driver.Quit();
-            SessionManager.Instance.RemoveSession(SessionId);
+            SessionManager.Instance.RemoveSession(this.SessionId);
             return null;
         }
     }

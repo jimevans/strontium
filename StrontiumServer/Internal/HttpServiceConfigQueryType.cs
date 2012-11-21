@@ -29,17 +29,17 @@ namespace StrontiumServer.Internal
     internal enum HttpServiceConfigQueryType
     {
         /// <summary>
-        /// Query the exact configuation.
+        /// Query the exact configuration.
         /// </summary>
         HttpServiceConfigQueryExact,
 
         /// <summary>
-        /// Query the next configuation.
+        /// Query the next configuration.
         /// </summary>
         HttpServiceConfigQueryNext,
 
         /// <summary>
-        /// Query the maximum configuation.
+        /// Query the maximum configuration.
         /// </summary>
         HttpServiceConfigQueryMax
     }

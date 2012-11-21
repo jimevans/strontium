@@ -69,6 +69,9 @@ namespace OpenQA.Selenium.Remote.Server
             }
         }
 
+        /// <summary>
+        /// Gets the list of currently active sessions.
+        /// </summary>
         internal IList<string> SessionList
         {
             get

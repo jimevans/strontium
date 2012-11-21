@@ -38,6 +38,7 @@ namespace OpenQA.Selenium.Remote.Server
         #region Constants
         private const int AccessDenied = 5;
         private const int SharingViolation = 32;
+        private const string ShutdownUrlFragment = "SHUTDOWN";
         #endregion
 
         #region Private members
@@ -55,7 +56,7 @@ namespace OpenQA.Selenium.Remote.Server
 
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="RemoteServer"/> class using the specifed port and relative path.
+        /// Initializes a new instance of the <see cref="RemoteServer"/> class using the specified port and relative path.
         /// </summary>
         /// <param name="port">The port to listen on.</param>
         /// <param name="path">The relative path to connect to.</param>
@@ -66,7 +67,7 @@ namespace OpenQA.Selenium.Remote.Server
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RemoteServer"/> class using the specifed port and relative path.
+        /// Initializes a new instance of the <see cref="RemoteServer"/> class using the specified port and relative path.
         /// </summary>
         /// <param name="port">The port to listen on.</param>
         /// <param name="path">The relative path to connect to.</param>
@@ -78,7 +79,7 @@ namespace OpenQA.Selenium.Remote.Server
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RemoteServer"/> class using the specifed port, relative path, and logger.
+        /// Initializes a new instance of the <see cref="RemoteServer"/> class using the specified port, relative path, and logger.
         /// </summary>
         /// <param name="basePath">The base path of the server to listen on.</param>
         /// <param name="port">The port to listen on.</param>
@@ -112,6 +113,11 @@ namespace OpenQA.Selenium.Remote.Server
             this.serverLogger = log;
         }
         #endregion
+
+        /// <summary>
+        /// Event raised when a shutdown of the server is requested via the shutdown URL.
+        /// </summary>
+        public event EventHandler ShutdownRequested;
 
         #region Properties
         /// <summary>
@@ -201,8 +207,20 @@ namespace OpenQA.Selenium.Remote.Server
         }
         #endregion
 
+        /// <summary>
+        /// Raises the ShutdownRequested event.
+        /// </summary>
+        /// <param name="e">An <see cref="EventArgs"/> object describing the event.</param>
+        protected void OnShutdownRequested(EventArgs e)
+        {
+            if (this.ShutdownRequested != null)
+            {
+                this.ShutdownRequested(this, e);
+            }
+        }
+
         #region Private support methods
-        private static ErrorResponse CreateErrorResponse(DriverCommand commandName, Exception ex)
+        private static ErrorResponse CreateErrorResponse(string commandName, Exception ex)
         {
             List<StackTraceElement> stackTraceElementList = new List<StackTraceElement>();
             StackTrace trace = new StackTrace(ex, true);
@@ -238,8 +256,12 @@ namespace OpenQA.Selenium.Remote.Server
             this.postDispatcherTable = new UriTemplateTable(new Uri(prefix.Replace("*", "localhost")));
             this.deleteDispatcherTable = new UriTemplateTable(new Uri(prefix.Replace("*", "localhost")));
 
-            foreach (DriverCommand commandName in Enum.GetValues(typeof(DriverCommand)))
+            // DriverCommand is a static class with static fields containing the command names.
+            // Since this is initialization code only, we'll take the perf hit in using reflection.
+            FieldInfo[] fields = typeof(DriverCommand).GetFields(BindingFlags.Public | BindingFlags.Static);
+            foreach (FieldInfo field in fields)
             {
+                string commandName = field.GetValue(null).ToString();
                 CommandInfo commandInformation = CommandInfoRepository.Instance.GetCommandInfo(commandName);
                 UriTemplate commandUriTemplate = new UriTemplate(commandInformation.ResourcePath);
                 if (!this.handlerFactory.CanCreateHandler(commandName))
@@ -328,7 +350,6 @@ namespace OpenQA.Selenium.Remote.Server
 
             // Obtain a response object.
             HttpListenerResponse response = context.Response;
-
             ServerResponse result = this.DispatchRequest(request.Url, httpMethod, requestBody);
             if (result.StatusCode == HttpStatusCode.SeeOther)
             {
@@ -351,6 +372,11 @@ namespace OpenQA.Selenium.Remote.Server
             
             // We must close the output stream.
             output.Close();
+
+            if (request.Url.AbsolutePath.ToUpperInvariant().Contains(ShutdownUrlFragment))
+            {
+                this.OnShutdownRequested(new EventArgs());
+            }
         }
 
         private ServerResponse DispatchRequest(Uri resourcePath, string httpMethod, string requestBody)
@@ -360,7 +386,11 @@ namespace OpenQA.Selenium.Remote.Server
             Dictionary<string, string> locatorParameters = new Dictionary<string, string>();
             UriTemplateTable templateTable = this.FindDispatcherTable(httpMethod);
             UriTemplateMatch match = templateTable.MatchSingle(resourcePath);
-            if (match == null)
+            if (resourcePath.AbsolutePath.ToUpperInvariant().Contains(ShutdownUrlFragment))
+            {
+                this.serverLogger.Log("Executing: [Shutdown] at URL: " + resourcePath.AbsolutePath);
+            }
+            else if (match == null)
             {
                 codeToReturn = HttpStatusCode.NotFound;
                 commandResponse.Value = "No command associated with " + resourcePath.AbsolutePath;
@@ -370,7 +400,7 @@ namespace OpenQA.Selenium.Remote.Server
                 string relativeUrl = match.RequestUri.AbsoluteUri.Substring(match.RequestUri.AbsoluteUri.IndexOf(this.listenerPath, StringComparison.OrdinalIgnoreCase) + this.listenerPath.Length - 1);
                 SessionId sessionIdValue = null;
 
-                DriverCommand commandName = (DriverCommand)match.Data;
+                string commandName = (string)match.Data;
                 foreach (string key in match.BoundVariables.Keys)
                 {
                     string value = match.BoundVariables[key];
@@ -429,7 +459,7 @@ namespace OpenQA.Selenium.Remote.Server
                     resultCode = WebDriverResult.ElementNotDisplayed;
                     resultValue = CreateErrorResponse(commandName, ex);
                 }
-                catch (NotSupportedException ex)
+                catch (InvalidElementStateException ex)
                 {
                     resultCode = WebDriverResult.InvalidElementState;
                     resultValue = CreateErrorResponse(commandName, ex);
@@ -443,6 +473,27 @@ namespace OpenQA.Selenium.Remote.Server
                 {
                     resultCode = WebDriverResult.XPathLookupError;
                     resultValue = CreateErrorResponse(commandName, ex);
+                }
+                catch (WebDriverTimeoutException ex)
+                {
+                    resultCode = WebDriverResult.Timeout;
+                    resultValue = CreateErrorResponse(commandName, ex);
+                }
+                catch (UnhandledAlertException ex)
+                {
+                    resultCode = WebDriverResult.UnexpectedAlertOpen;
+
+                    // This is ridiculously ugly. To be refactored.
+                    ErrorResponse err = CreateErrorResponse(commandName, ex);
+                    Dictionary<string, object> resp = new Dictionary<string, object>();
+                    resp["class"] = err.ClassName;
+                    resp["message"] = err.Message;
+                    resp["screen"] = err.Screenshot;
+                    resp["stackTrace"] = err.StackTrace;
+                    Dictionary<string, object> alert = new Dictionary<string, object>();
+                    alert["text"] = ex.Alert.Text;
+                    resp["alert"] = alert;
+                    resultValue = resp;
                 }
                 catch (Exception ex)
                 {

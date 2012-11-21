@@ -37,7 +37,7 @@ namespace StrontiumServer.Internal
         /// Initializes a new instance of the <see cref="HttpApiVersion"/> struct.
         /// </summary>
         /// <param name="majorVersion">The major version of the HTTP API.</param>
-        /// <param name="minorVersion">The minor verison of the HTTP API.</param>
+        /// <param name="minorVersion">The minor version of the HTTP API.</param>
         public HttpApiVersion(ushort majorVersion, ushort minorVersion)
         {
             this.Major = majorVersion;

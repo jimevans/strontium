@@ -39,7 +39,7 @@ namespace OpenQA.Selenium.Remote.Server
         /// Initializes a new instance of the <see cref="ServerResponse"/> class.
         /// </summary>
         /// <param name="responseToReturn">A <see cref="Response"/> object to be sent to the remote client.</param>
-        /// <param name="status">An <see cref="HttpStatusCode"/> value to set the status code of the HTTP repsonse.</param>
+        /// <param name="status">An <see cref="HttpStatusCode"/> value to set the status code of the HTTP response.</param>
         internal ServerResponse(Response responseToReturn, HttpStatusCode status)
         {
             this.returnedResponse = responseToReturn;

@@ -104,6 +104,7 @@ namespace OpenQA.Selenium.Remote.Server
             this.MapCommandHandler(DriverCommand.MouseUp, typeof(MouseUpHandler));
             this.MapCommandHandler(DriverCommand.MouseMoveTo, typeof(MouseMoveToHandler));
             this.MapCommandHandler(DriverCommand.SendKeysToActiveElement, typeof(SendKeysToActiveElementHandler));
+            this.MapCommandHandler(DriverCommand.UploadFile, typeof(UploadFileHandler));
         }
     }
 }

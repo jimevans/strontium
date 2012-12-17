@@ -54,6 +54,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\Dependencies\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -71,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandlers\AcceptAlertHandler.cs" />
+    <Compile Include="CommandHandlers\UploadFileHandler.cs" />
     <Compile Include="CommandHandlers\SetTimeoutHandler.cs" />
     <Compile Include="CommandHandlers\MaximizeWindowHandler.cs" />
     <Compile Include="CommandHandlers\SendKeysToActiveElementHandler.cs" />

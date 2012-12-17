@@ -73,6 +73,7 @@
     <Compile Include="CommandHandler.cs" />
     <Compile Include="CommandHandlerFactory.cs" />
     <Compile Include="CommandNotImplementedHandler.cs" />
+    <Compile Include="Exceptions\CommandNotImplementedException.cs" />
     <Compile Include="Exceptions\InvalidCommandException.cs" />
     <Compile Include="Exceptions\InvalidParameterException.cs" />
     <Compile Include="Exceptions\ResourceNotFoundException.cs" />

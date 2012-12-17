@@ -419,6 +419,11 @@ namespace OpenQA.Selenium.Remote.Server
                     resultValue = handler.Execute();
                     codeToReturn = handler.StatusCode;
                 }
+                catch (CommandNotImplementedException ex)
+                {
+                    codeToReturn = HttpStatusCode.NotImplemented;
+                    resultValue = ex.Message + " (" + commandName + ")";
+                }
                 catch (InvalidCommandException ex)
                 {
                     codeToReturn = HttpStatusCode.MethodNotAllowed;

@@ -51,9 +51,10 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         /// This handler represents a command that has not been implemented. It is a no-op.
         /// </summary>
         /// <returns>This command always returns <see langword="null"/>.</returns>
+        /// <exception cref="CommandNotImplementedException">always thrown with this handler</exception>
         public override object Execute()
         {
-            return null;
+            throw new CommandNotImplementedException("Command not implemented");
         }
     }
 }

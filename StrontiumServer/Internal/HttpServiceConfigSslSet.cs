@@ -30,7 +30,14 @@ namespace StrontiumServer.Internal
     [StructLayout(LayoutKind.Sequential)]
     internal struct HttpServiceConfigSslSet
     {
+        /// <summary>
+        /// The key of the SSL parameter.
+        /// </summary>
         public HttpServiceConfigSslKey KeyDesc;
+
+        /// <summary>
+        /// The parameter value of the SSL parameter.
+        /// </summary>
         public HttpServiceConfigSslParam ParamDesc;
     }
 }

@@ -30,7 +30,14 @@ namespace StrontiumServer.Internal
     [StructLayout(LayoutKind.Sequential, Pack = 2)]
     internal struct HttpApiVersion
     {
+        /// <summary>
+        /// The major version of the HTTP API.
+        /// </summary>
         public ushort Major;
+
+        /// <summary>
+        /// The minor version of the HTTP API.
+        /// </summary>
         public ushort Minor;
 
         /// <summary>

@@ -40,8 +40,8 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public SetWindowSizeHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            int width = Convert.ToInt32(GetCommandParameter("width"));
-            int height = Convert.ToInt32(GetCommandParameter("height"));
+            int width = Convert.ToInt32(GetCommandParameter("width"), CultureInfo.InvariantCulture);
+            int height = Convert.ToInt32(GetCommandParameter("height"), CultureInfo.InvariantCulture);
 
             this.newWindowSize = new Size(width, height);
         }

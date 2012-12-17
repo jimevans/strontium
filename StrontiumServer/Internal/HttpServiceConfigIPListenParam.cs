@@ -30,7 +30,14 @@ namespace StrontiumServer.Internal
     [StructLayout(LayoutKind.Sequential)]
     internal struct HttpServiceConfigIPListenParam
     {
+        /// <summary>
+        /// The address length of the IP address.
+        /// </summary>
         public ushort AddrLength;
+
+        /// <summary>
+        /// The pointer to the IP address.
+        /// </summary>
         public IntPtr Address;
     }
 }

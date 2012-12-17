@@ -30,8 +30,19 @@ namespace StrontiumServer.Internal
     [StructLayout(LayoutKind.Sequential)]
     internal struct HttpServiceConfigSslQuery
     {
+        /// <summary>
+        /// The service configuration query type.
+        /// </summary>
         public HttpServiceConfigQueryType QueryDesc;
+
+        /// <summary>
+        /// The service configuration SSL key.
+        /// </summary>
         public HttpServiceConfigSslKey KeyDesc;
+
+        /// <summary>
+        /// The token to be used.
+        /// </summary>
         public uint Token;
     }
 }

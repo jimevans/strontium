@@ -160,17 +160,64 @@ namespace StrontiumServer.Internal
         [StructLayout(LayoutKind.Sequential)]
         internal struct OSVersionInfoEx
         {
+            /// <summary>
+            /// The size of this data structure, in bytes.
+            /// </summary>
             public int dwOSVersionInfoSize;
+
+            /// <summary>
+            /// The major version number of the operating system.
+            /// </summary>
             public int dwMajorVersion;
+
+            /// <summary>
+            /// The major version number of the operating system.
+            /// </summary>
             public int dwMinorVersion;
+
+            /// <summary>
+            /// The build number of the operating system.
+            /// </summary>
             public int dwBuildNumber;
+
+            /// <summary>
+            /// The build number of the operating system.
+            /// </summary>
             public int dwPlatformId;
+
+            /// <summary>
+            /// A null-terminated string, such as "Service Pack 3", that indicates the latest Service Pack
+            /// installed on the system. If no Service Pack has been installed, the string is empty.
+            /// </summary>
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
             public string szCSDVersion;
+
+            /// <summary>
+            /// The major version number of the latest Service Pack installed on the system. For example, 
+            /// for Service Pack 3, the major version number is 3. If no Service Pack has been installed, 
+            /// the value is zero.
+            /// </summary>
             public short wServicePackMajor;
+
+            /// <summary>
+            /// The minor version number of the latest Service Pack installed on the system. For example,
+            /// for Service Pack 3, the minor version number is 0.
+            /// </summary>
             public short wServicePackMinor;
+
+            /// <summary>
+            /// A bit mask that identifies the product suites available on the system.
+            /// </summary>
             public short wSuiteMask;
+
+            /// <summary>
+            /// Any additional information about the system.
+            /// </summary>
             public byte wProductType;
+
+            /// <summary>
+            /// Reserved for future use.
+            /// </summary>
             public byte wReserved;
         }
 
@@ -180,16 +227,59 @@ namespace StrontiumServer.Internal
         [StructLayout(LayoutKind.Sequential)]
         internal struct SystemInfo
         {
+            /// <summary>
+            /// The processor architecture of the installed operating system.
+            /// </summary>
             public ushort processorArchitecture;
+
+            /// <summary>
+            /// his member is reserved for future use.
+            /// </summary>
             public ushort reserved;
+
+            /// <summary>
+            /// The page size and the granularity of page protection and commitment.
+            /// </summary>
             public uint pageSize;
+
+            /// <summary>
+            /// A pointer to the lowest memory address accessible to applications and dynamic-link libraries (DLLs).
+            /// </summary>
             public IntPtr minimumApplicationAddress;
+
+            /// <summary>
+            /// A pointer to the highest memory address accessible to applications and DLLs.
+            /// </summary>
             public IntPtr maximumApplicationAddress;
+
+            /// <summary>
+            /// A mask representing the set of processors configured into the system.
+            /// </summary>
             public IntPtr activeProcessorMask;
+
+            /// <summary>
+            /// The number of logical processors in the current group.
+            /// </summary>
             public uint numberOfProcessors;
+
+            /// <summary>
+            /// An obsolete member that is retained for compatibility.
+            /// </summary>
             public uint processorType;
+
+            /// <summary>
+            /// The granularity for the starting address at which virtual memory can be allocated.
+            /// </summary>
             public uint allocationGranularity;
+
+            /// <summary>
+            /// The architecture-dependent processor level. It should be used only for display purposes.
+            /// </summary>
             public ushort processorLevel;
+
+            /// <summary>
+            /// The architecture-dependent processor revision.
+            /// </summary>
             public ushort processorRevision;
         }
     }

@@ -30,7 +30,14 @@ namespace StrontiumServer.Internal
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct HttpServiceConfigUrlAclSet
     {
+        /// <summary>
+        /// The key for the service configuration parameter.
+        /// </summary>
         public HttpServiceConfigUrlAclKey KeyDesc;
+
+        /// <summary>
+        /// The value for the service configuration parameter.
+        /// </summary>
         public HttpServiceConfigUrlAclParam ParamDesc;
     }
 }

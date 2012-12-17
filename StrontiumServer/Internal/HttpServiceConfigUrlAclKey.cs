@@ -30,6 +30,9 @@ namespace StrontiumServer.Internal
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct HttpServiceConfigUrlAclKey
     {
+        /// <summary>
+        /// The URL prefix for the ACL.
+        /// </summary>
         [MarshalAs(UnmanagedType.LPWStr)]
         public string UrlPrefix;
 

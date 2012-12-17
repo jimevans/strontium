@@ -30,18 +30,57 @@ namespace StrontiumServer.Internal
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct HttpServiceConfigSslParam
     {
+        /// <summary>
+        /// The hash length for the SSL encryption.
+        /// </summary>
         public int SslHashLength;
+
+        /// <summary>
+        /// A pointer to the hash of the SSL encryption.
+        /// </summary>
         public IntPtr SslHash;
+
+        /// <summary>
+        /// The ID of the application.
+        /// </summary>
         public Guid AppId;
+
+        /// <summary>
+        /// The name of the SSL certificate store.
+        /// </summary>
         [MarshalAs(UnmanagedType.LPWStr)]
         public string SslCertStoreName;
+
+        /// <summary>
+        /// The default check mode for certificates.
+        /// </summary>
         public uint DefaultCertCheckMode;
+
+        /// <summary>
+        /// The default revocation time for the certificate.
+        /// </summary>
         public int DefaultRevocationFreshnessTime;
+
+        /// <summary>
+        /// The default revocation timeout for URL retrieval.
+        /// </summary>
         public int DefaultRevocationUrlRetrievalTimeout;
+
+        /// <summary>
+        /// The default SSL control identifier.
+        /// </summary>
         [MarshalAs(UnmanagedType.LPWStr)]
         public string DefaultSslCtlIdentifier;
+
+        /// <summary>
+        /// The default SSL control store name.
+        /// </summary>
         [MarshalAs(UnmanagedType.LPWStr)]
         public string DefaultSslCtlStoreName;
+
+        /// <summary>
+        /// The default flags for the SSL configuration.
+        /// </summary>
         public uint DefaultFlags;
     }
 }

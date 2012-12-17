@@ -59,8 +59,8 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
 
             if (this.HasCommandParameter(XOffsetParameterName) && this.HasCommandParameter(YOffsetParameterName))
             {
-                this.offsetX = Convert.ToInt32(GetCommandParameter(XOffsetParameterName));
-                this.offsetY = Convert.ToInt32(GetCommandParameter(YOffsetParameterName));
+                this.offsetX = Convert.ToInt32(this.GetCommandParameter(XOffsetParameterName), CultureInfo.InvariantCulture);
+                this.offsetY = Convert.ToInt32(this.GetCommandParameter(YOffsetParameterName), CultureInfo.InvariantCulture);
                 this.offsetsProvided = true;
             }
             else

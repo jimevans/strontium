@@ -30,8 +30,19 @@ namespace StrontiumServer.Internal
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct HttpServiceConfigUrlAclQuery
     {
+        /// <summary>
+        /// The configuration query type.
+        /// </summary>
         public HttpServiceConfigQueryType QueryDesc;
+
+        /// <summary>
+        /// The configuration key.
+        /// </summary>
         public HttpServiceConfigUrlAclKey KeyDesc;
+
+        /// <summary>
+        /// The token to use in the query.
+        /// </summary>
         public uint Token;
     }
 }

@@ -40,8 +40,8 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public SetWindowPositionHandler(Dictionary<string, string> locatorParameters, Dictionary<string, object> parameters)
             : base(locatorParameters, parameters)
         {
-            int x = Convert.ToInt32(GetCommandParameter("x"));
-            int y = Convert.ToInt32(GetCommandParameter("y"));
+            int x = Convert.ToInt32(GetCommandParameter("x"), CultureInfo.InvariantCulture);
+            int y = Convert.ToInt32(GetCommandParameter("y"), CultureInfo.InvariantCulture);
 
             this.windowPosition = new Point(x, y);
         }

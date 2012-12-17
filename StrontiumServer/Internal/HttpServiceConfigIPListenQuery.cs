@@ -30,7 +30,14 @@ namespace StrontiumServer.Internal
     [StructLayout(LayoutKind.Sequential)]
     internal struct HttpServiceConfigIPListenQuery
     {
+        /// <summary>
+        /// The count of IP addresses.
+        /// </summary>
         public int AddrCount;
+
+        /// <summary>
+        /// A pointer to the list of IP addresses.
+        /// </summary>
         public IntPtr AddrList;
     }
 }

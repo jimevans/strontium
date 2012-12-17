@@ -30,6 +30,9 @@ namespace StrontiumServer.Internal
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct HttpServiceConfigUrlAclParam
     {
+        /// <summary>
+        /// The security descriptor of the ACL as a string.
+        /// </summary>
         [MarshalAs(UnmanagedType.LPWStr)]
         public string StringSecurityDescriptor;
 

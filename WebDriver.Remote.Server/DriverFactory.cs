@@ -56,11 +56,11 @@ namespace OpenQA.Selenium.Remote.Server
             }
             catch (TargetInvocationException e)
             {
-                throw new WebDriverException(string.Empty, e);
+                throw new WebDriverException(e.Message, e);
             }
             catch (MethodAccessException e)
             {
-                throw new WebDriverException(string.Empty, e);
+                throw new WebDriverException(e.Message, e);
             }
         }
 

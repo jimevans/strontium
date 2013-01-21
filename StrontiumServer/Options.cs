@@ -40,6 +40,7 @@ namespace StrontiumServer
         private const string ReserveUrlCommandLineOption = "RESERVE";
         private const string RemoteShutdownCommandLineOption = "REMOTESHUTDOWN";
         private const string LogLevelCommandLineOption = "LOGLEVEL";
+        private const string HubCommandLineOption = "HUB";
 
         private int port = 4444;
         private string userName = string.Empty;
@@ -47,6 +48,7 @@ namespace StrontiumServer
         private string urlToReserve = string.Empty;
         private string operatingSystemVersion = string.Empty;
         private string serverVersion = string.Empty;
+        private string hubLocation = string.Empty;
         private bool reserveUrl;
         private bool currentUserIsAdmin;
         private bool ignoreRemoteShutdown;
@@ -144,6 +146,14 @@ namespace StrontiumServer
         }
 
         /// <summary>
+        /// Gets the location of the hub to which this server should be registered.
+        /// </summary>
+        internal string HubLocation
+        {
+            get { return this.hubLocation; }
+        }
+
+        /// <summary>
         /// Gets the logging level of the server.
         /// </summary>
         internal LogLevel LoggingLevel
@@ -175,6 +185,10 @@ namespace StrontiumServer
 
                 case RemoteShutdownCommandLineOption:
                     this.ignoreRemoteShutdown = value.ToUpperInvariant() == "IGNORE";
+                    break;
+
+                case HubCommandLineOption:
+                    this.hubLocation = value;
                     break;
 
                 case LogLevelCommandLineOption:

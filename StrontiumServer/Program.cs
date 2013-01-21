@@ -72,6 +72,11 @@ namespace StrontiumServer
                 {
                     httpServer.StartListening();
                     logger.Log(string.Format(CultureInfo.InvariantCulture, "Server started. RemoteWebDriver instances connect to http://<this machine name>:{0}/wd/hub/", commandLineOptions.Port), LogLevel.Info);
+                    if (!string.IsNullOrEmpty(commandLineOptions.HubLocation))
+                    {
+                        httpServer.RegisterWithHub(commandLineOptions.HubLocation);
+                    }
+
                     Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
                     while (continueRunning)
                     {

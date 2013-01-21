@@ -23,6 +23,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
@@ -39,6 +40,31 @@ namespace OpenQA.Selenium.Remote.Server
         private const int AccessDenied = 5;
         private const int SharingViolation = 32;
         private const string ShutdownUrlFragment = "SHUTDOWN";
+        private const string NodeConfiguration = @"{{
+""capabilities"":
+  [
+    {{
+      ""browserName"": ""firefox"",
+      ""maxInstances"": 5,
+      ""seleniumProtocol"": ""WebDriver""
+    }},
+    {{
+      ""browserName"": ""chrome"",
+      ""maxInstances"": 5,
+      ""seleniumProtocol"": ""WebDriver""
+    }},
+    {{
+      ""platform"": ""WINDOWS"",
+      ""browserName"": ""internet explorer"",
+      ""maxInstances"": 1,
+      ""seleniumProtocol"": ""WebDriver""
+    }}
+  ],
+""configuration"":
+  {{
+    ""remoteHost"": ""http://{0}:{1}""
+  }}
+}}";
         #endregion
 
         #region Private members
@@ -179,6 +205,44 @@ namespace OpenQA.Selenium.Remote.Server
                 this.listener.Stop();
             }
         }
+
+        /// <summary>
+        /// Registers this server with a grid hub.
+        /// </summary>
+        /// <param name="hubLocation">The location of the hub.</param>
+        public void RegisterWithHub(string hubLocation)
+        {
+            if (!string.IsNullOrEmpty(hubLocation))
+            {
+                Uri hubUri = null;
+                bool isValidHubUri = Uri.TryCreate(hubLocation, UriKind.Absolute, out hubUri);
+                if (isValidHubUri)
+                {
+                    HttpWebRequest request = WebRequest.Create(hubUri) as HttpWebRequest;
+                    request.Method = "POST";
+                    string nodeConfig = string.Format(CultureInfo.InvariantCulture, NodeConfiguration, GetIPAddressList()[0].ToString(), this.listenerPort);
+                    byte[] requestBodyBuffer = Encoding.UTF8.GetBytes(nodeConfig);
+                    Stream requestStream = request.GetRequestStream();
+                    requestStream.Write(requestBodyBuffer, 0, requestBodyBuffer.Length);
+                    try
+                    {
+                        HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+                        if (response.StatusCode == HttpStatusCode.OK)
+                        {
+                            this.serverLogger.Log(string.Format(CultureInfo.InvariantCulture, "Registered as a node with hub located at {0}", hubLocation));
+                        }
+                        else
+                        {
+                            this.serverLogger.Log(string.Format(CultureInfo.InvariantCulture, "Received error HTTP status code registering as a node with hub located at {0}: ", hubLocation, response.StatusCode.ToString()));
+                        }
+                    }
+                    catch (WebException ex)
+                    {
+                        this.serverLogger.Log(string.Format(CultureInfo.InvariantCulture, "Error registring as a node with hub located at {0}: {1}", hubLocation, ex.Message));
+                    }
+                }
+            }
+        }
         #endregion
 
         #region IDisposable Members
@@ -220,6 +284,29 @@ namespace OpenQA.Selenium.Remote.Server
         }
 
         #region Private support methods
+        private static List<IPAddress> GetIPAddressList()
+        {
+            List<IPAddress> addresses = new List<IPAddress>();
+
+            // Obtain a reference to all network interfaces in the machine
+            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (NetworkInterface adapter in adapters)
+            {
+                IPInterfaceProperties properties = adapter.GetIPProperties();
+                foreach (IPAddressInformation uniCast in properties.UnicastAddresses)
+                {
+                    // Ignoring IPv6 addresses and loopback addresses.
+                    // TODO: Make the address configurable.
+                    if (uniCast.Address.AddressFamily == AddressFamily.InterNetwork && !IPAddress.IsLoopback(uniCast.Address))
+                    {
+                        addresses.Add(uniCast.Address);
+                    }
+                }
+            }
+
+            return addresses;
+        }
+
         private static ErrorResponse CreateErrorResponse(string commandName, Exception ex)
         {
             List<StackTraceElement> stackTraceElementList = new List<StackTraceElement>();

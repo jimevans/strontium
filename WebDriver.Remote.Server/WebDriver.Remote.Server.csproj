@@ -63,9 +63,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.ServiceModel.Web">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="WebDriver, Version=2.15.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -73,6 +71,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandler.cs" />
+    <Compile Include="CommandHandlerFactory.cs" />
     <Compile Include="CommandHandlers\AcceptAlertHandler.cs" />
     <Compile Include="CommandHandlers\UploadFileHandler.cs" />
     <Compile Include="CommandHandlers\SetTimeoutHandler.cs" />
@@ -96,6 +96,16 @@
     <Compile Include="CommandHandlers\SetAlertTextHandler.cs" />
     <Compile Include="CommandHandlers\GetAlertTextHandler.cs" />
     <Compile Include="CommandHandlers\DismissAlertHandler.cs" />
+    <Compile Include="CommandNotImplementedHandler.cs" />
+    <Compile Include="Exceptions\CommandNotImplementedException.cs" />
+    <Compile Include="Exceptions\InvalidCommandException.cs" />
+    <Compile Include="Exceptions\InvalidParameterException.cs" />
+    <Compile Include="Exceptions\ResourceNotFoundException.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Loggers\ConsoleLogger.cs" />
+    <Compile Include="Loggers\NullLogger.cs" />
+    <Compile Include="LogLevel.cs" />
+    <Compile Include="RemoteServer.cs" />
     <Compile Include="RemoteWebDriverServerCommandHandlerFactory.cs" />
     <Compile Include="CommandHandlers\ImplicitlyWaitHandler.cs" />
     <Compile Include="CommandHandlers\DescribeElementHandler.cs" />
@@ -144,19 +154,17 @@
     <Compile Include="CommandHandlers\WebDriverCommandHandler.cs" />
     <Compile Include="DriverFactory.cs" />
     <Compile Include="DriverRegistrationFailedEventArgs.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="GlobalSuppressions.cs">
+      <SubType>
+      </SubType>
+    </Compile>
     <Compile Include="KnownElementRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteWebDriverServer.cs" />
     <Compile Include="DriverSession.cs" />
+    <Compile Include="ServerResponse.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="CommandHandlers\WebElementCommandHandler.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WebDriver.Remote.Server.Common\WebDriver.Remote.Server.Common.csproj">
-      <Project>{FF46A4DA-9590-475C-9B54-0F341514CFC4}</Project>
-      <Name>WebDriver.Remote.Server.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -24,6 +24,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Text;
+using OpenQA.Selenium.Remote.Server;
 using StrontiumServer.Internal;
 
 namespace StrontiumServer
@@ -38,6 +39,7 @@ namespace StrontiumServer
         private const string PasswordCommandLineOption = "PASSWORD";
         private const string ReserveUrlCommandLineOption = "RESERVE";
         private const string RemoteShutdownCommandLineOption = "REMOTESHUTDOWN";
+        private const string LogLevelCommandLineOption = "LOGLEVEL";
 
         private int port = 4444;
         private string userName = string.Empty;
@@ -48,6 +50,7 @@ namespace StrontiumServer
         private bool reserveUrl;
         private bool currentUserIsAdmin;
         private bool ignoreRemoteShutdown;
+        private LogLevel logLevel = LogLevel.Info;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Options"/> class.
@@ -140,6 +143,14 @@ namespace StrontiumServer
             get { return this.ignoreRemoteShutdown; }
         }
 
+        /// <summary>
+        /// Gets the logging level of the server.
+        /// </summary>
+        internal LogLevel LoggingLevel
+        {
+            get { return this.logLevel; }
+        }
+
         private void SetOption(string name, string value)
         {
             string argumentName = name.Substring(1).ToUpperInvariant();
@@ -164,6 +175,15 @@ namespace StrontiumServer
 
                 case RemoteShutdownCommandLineOption:
                     this.ignoreRemoteShutdown = value.ToUpperInvariant() == "IGNORE";
+                    break;
+
+                case LogLevelCommandLineOption:
+                    LogLevel level = LogLevel.Info;
+                    if (Enum.TryParse<LogLevel>(value, true, out level))
+                    {
+                        this.logLevel = level;
+                    }
+
                     break;
             }
         }
@@ -220,7 +240,7 @@ namespace StrontiumServer
                             this.operatingSystemVersion = "Windows Server 2008";
                         }
                     }
-                    else
+                    else if (versionInfo.dwMinorVersion == 1)
                     {
                         if (versionType == NativeMethods.VersionNT.Workstation)
                         {
@@ -231,15 +251,26 @@ namespace StrontiumServer
                             this.operatingSystemVersion = "Windows Server 2008 R2";
                         }
                     }
+                    else
+                    {
+                        if (versionType == NativeMethods.VersionNT.Workstation)
+                        {
+                            this.operatingSystemVersion = "Windows 8";
+                        }
+                        else
+                        {
+                            this.operatingSystemVersion = "Windows Server 2012";
+                        }
+                    }
                 }
                 else
                 {
                     this.operatingSystemVersion = "Unsupported Windows NT version";
                 }
 
-                if (versionInfo.szCSDVersion.Length > 0)
+                if (Environment.OSVersion.ServicePack.Length > 0)
                 {
-                    this.operatingSystemVersion = this.operatingSystemVersion + " " + versionInfo.szCSDVersion;
+                    this.operatingSystemVersion = this.operatingSystemVersion + " " + Environment.OSVersion.ServicePack;
                 }
 
                 this.operatingSystemVersion += " " + string.Format(CultureInfo.InvariantCulture, "({0}.{1}.{2})", versionInfo.dwMajorVersion, versionInfo.dwMinorVersion, versionInfo.dwBuildNumber);

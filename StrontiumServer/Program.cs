@@ -24,7 +24,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 using OpenQA.Selenium.Remote.Server;
@@ -38,7 +37,7 @@ namespace StrontiumServer
     internal class Program
     {
         private static RemoteWebDriverServer httpServer;
-        private static ConsoleLogger logger = new ConsoleLogger(LogLevel.Info);
+        private static ConsoleLogger logger = null;
         private static string userName = string.Empty;
         private static string password = string.Empty;
         private static bool continueRunning = true;
@@ -51,6 +50,7 @@ namespace StrontiumServer
         public static void Main(string[] args)
         {
             Options commandLineOptions = new Options(args);
+            logger = new ConsoleLogger(commandLineOptions.LoggingLevel);
             if (commandLineOptions.ReserveUrl)
             {
                 bool urlReserved = ReserveUrl(commandLineOptions.UrlToReserve, true);
@@ -112,10 +112,6 @@ namespace StrontiumServer
             logger.Log(serverVersion);
             logger.Log(".NET runtime version: " + Environment.Version.ToString());
             logger.Log("OS version: " + operatingSystemVersion);
-            if (!commandLineOptions.CurrentUserIsAdmin)
-            {
-                logger.Log("Process is not running as an administrator. Some actions may not function properly.", LogLevel.Warning);
-            }
         }
 
         private static bool CheckForUrlReservation(Options commandLineOptions)

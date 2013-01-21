@@ -46,6 +46,11 @@ namespace OpenQA.Selenium.Remote.Server
         /// <summary>
         /// Error messages
         /// </summary>
-        Error
+        Error, 
+
+        /// <summary>
+        /// No logging
+        /// </summary>
+        None
     }
 }

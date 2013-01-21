@@ -1,7 +1,6 @@
 ﻿// <copyright file="HttpServiceConfigIPListenQuery.cs" company="WebDriver Committers">
-// Copyright 2007-2011 WebDriver committers
-// Copyright 2007-2011 Google Inc.
-// Portions copyright 2007 ThoughtWorks, Inc
+//
+// Copyright 2010-2013 Jim Evans (james.h.evans.jr@gmail.com)
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.

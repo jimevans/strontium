@@ -43,6 +43,23 @@ The Strontium server requires the .NET Framework version 4.0 to run. For develop
 Strontium, a Microsoft Visual Studio 2010 solution and project files are provided. The
 server depends on the .NET bindings of the Selenium WebDriver project.
 
+Issues and Pull Requests
+------------------------
+Feel free to file issues here, but be aware that without a full reproducible case, they
+will be summarily closed. A full reproducible case includes the WebDriver code you are
+using with the Strontium server, as well as an [HTML page or URL to a public page]
+(http://jimevansmusic.blogspot.com/2012/12/not-providing-html-page-is-bogus.html)
+demonstrating the issue. Please remember that at present, there is only one developer
+working on this project, and it is very much a side project. Your patience and cooperation
+is greatly apprecitated.
+
+If you get frustrated waiting for me to fix an issue that you've encountered with Strontium,
+pull requests are always welcome. Please make sure you have run [FxCop] 
+(http://www.microsoft.com/en-us/download/details.aspx?id=6544) and [StyleCop]
+(http://stylecop.codeplex.com/) on your code and resolved all issues before submission.
+StyleCop settings files with the proper style rules enabled are provided as part of the code
+repository. 
+
 A word about NuGet
 ------------------
 There is no NuGet package provided for the Strontium project, and there is unlikely to

@@ -27,7 +27,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
     /// <summary>
     /// Provides the handler for the <see cref="DriverCommand.Status"/> command.
     /// </summary>
-    internal class StatusHandler : WebDriverCommandHandler
+    internal class StatusHandler : CommandHandler
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="StatusHandler"/> class.
@@ -55,12 +55,7 @@ namespace OpenQA.Selenium.Remote.Server.CommandHandlers
         public override object Execute()
         {
             Dictionary<string, object> build = new Dictionary<string, object>();
-            object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyVersionAttribute), false);
-            if (attributes.Length > 0)
-            {
-                AssemblyVersionAttribute version = attributes[0] as AssemblyVersionAttribute;
-                build["version"] = version.Version;
-            }
+            build["version"] = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             Dictionary<string, object> os = new Dictionary<string, object>();
             string platformName = "windows";
